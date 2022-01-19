@@ -7,7 +7,9 @@ import static picocli.CommandLine.Command;
         header = "%n@|green User related functions|@",
         subcommands = {
                 UserCurrent.class,
-                UserList.class
+                UserList.class,
+                UserEnvList.class,
+                UserEnvDelete.class
         })
 public class User extends AbstractParentCommand {
 
