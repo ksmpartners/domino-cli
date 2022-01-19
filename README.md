@@ -1,4 +1,5 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Java CI](https://github.com/ksmpartners/domino-cli/actions/workflows/build.yml/badge.svg)](https://github.com/ksmpartners/domino-cli/actions/workflows/build.yml)
 
 # Introduction
 
