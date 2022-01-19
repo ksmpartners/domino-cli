@@ -1,2 +1,65 @@
-# domino-cli
-Domino Data Labs Command Line Interface
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+# Introduction
+
+Domino Data Lab Command Line Interface is a client used provision and control Domino.
+
+# Build and Test
+
+To build the project requires Apache Maven:
+
+```shell
+$ mvn clean package
+```
+
+To test the CLI:
+
+```shell
+$ java -jar ./target/domino-cli.jar --version
+
+Domino CLI 1.0.0
+Copyright 2022, KSM Technology Partners LLC
+Java OpenJDK Runtime Environment 11.0.8+10 Oracle Corporation
+OS Windows 10 10.0 amd64
+```
+
+# Domino Settings
+
+To connect to Domino you will need at least the URL of where your Domino installation is and a personal API key to
+access the API. You can set your variables either as environment variables `DOMINO_API_KEY` and `DOMINO_API_URL` or use
+the command line parameters `-k` and `-u`.
+
+To add your environment variables in Windows Powershell you can add them like this:
+
+```powershell
+[Environment]::SetEnvironmentVariable("DOMINO_API_KEY", "YOUR_KEY", "User")
+[Environment]::SetEnvironmentVariable("DOMINO_API_URL", "https://domino.yourcompany.com", "User")
+```
+
+To test it is working run the following command to print out your current user information:
+
+```shell
+$ java -jar ./target/domino-cli.jar user current
+```
+
+If you are not using environment variables it would be:
+
+```shell
+$ java -jar ./target/domino-cli.jar -k YOUR_KEY -u https://domino.yourcompany.com user current
+```
+
+```json
+{
+  "firstName": "Homer",
+  "lastName": "Simpson",
+  "fullName": "Homer Simpson",
+  "id": "6124ffbfa7db86282dde302a",
+  "userName": "hs12345",
+  "email": "homer.simpson@springfield.org"
+}
+```
+
+### License
+
+***
+Licensed under the MIT License.
