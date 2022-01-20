@@ -1,7 +1,7 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.ksm</groupId>
+    <groupId>com.ksmpartners</groupId>
     <artifactId>domino-cli</artifactId>
     <packaging>jar</packaging>
     <version>1.0.0-SNAPSHOT</version>
@@ -16,6 +16,22 @@
         <open-api-generator.version>5.3.1</open-api-generator.version>
         <junit.version>5.8.2</junit.version>
     </properties>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/ksmpartners/domino-cli/issues</url>
+    </issueManagement>
+    <scm>
+        <connection>scm:git:https://github.com/ksmpartners/domino-cli.git</connection>
+        <developerConnection>scm:git:https://github.com/ksmpartners/domino-cli.git</developerConnection>
+        <url>https://github.com/ksmpartners/domino-cli</url>
+    </scm>
     <dependencies>
         <dependency>
             <groupId>info.picocli</groupId>
@@ -133,7 +149,7 @@
                         <configuration>
                             <!-- Exclude JarClassLoader artifact and anything else you do not need -->
                             <includeScope>compile</includeScope>
-                            <excludeArtifactIds>spotbugs-annotations,lombok</excludeArtifactIds>
+                            <excludeArtifactIds>spotbugs-annotations,lombok,swagger-annotations</excludeArtifactIds>
                             <outputDirectory>${project.build.directory}/classes</outputDirectory>
                         </configuration>
                     </execution>
@@ -152,6 +168,15 @@
                             <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                         </manifest>
                     </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <reuseForks>false</reuseForks>
+                    <forkCount>1</forkCount>
                 </configuration>
             </plugin>
         </plugins>

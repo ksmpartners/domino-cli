@@ -13,7 +13,7 @@ import static picocli.CommandLine.*;
 
 @Command(name = "domino",
         header = "%n@|green Domino CLI|@",
-        description = "Domino Data Lab Command Line Interface is a client to used provision and control Domino.%n",
+        description = "%n@|blue Domino Data Lab Command Line Interface is a client to used provision and control Domino.|@%n",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class,
         defaultValueProvider = EnvironmentVariableDefaultProvider.class,

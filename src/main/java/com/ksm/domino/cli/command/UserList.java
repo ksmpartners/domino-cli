@@ -14,7 +14,7 @@ import static picocli.CommandLine.Parameters;
 @Command(name = "list", header = "%n@|green Retrieves a list of users|@")
 public class UserList extends AbstractDominoCommand {
 
-    @Parameters(description = "@|blue Optional parameters such as userId=6112, userName=hsimpson, or query=flanders|@", mapFallbackValue = "")
+    @Parameters(description = "@|blue Optional parameters:%n userId=123,456,789%n userName=hsimpson%n query=flanders%n|@%n", mapFallbackValue = "")
     private final Map<String, String> parameters = new LinkedHashMap<>(3);
 
     @Override
@@ -22,7 +22,7 @@ public class UserList extends AbstractDominoCommand {
         String userId = parameters.get("userId");
         List<String> userIds = null;
         if (StringUtils.isNotBlank(userId)) {
-            userIds = List.of(parameters.get("userId"));
+            userIds = List.of(StringUtils.split(parameters.get("userId"), ','));
         }
         String userName = parameters.get("userName");
         String query = parameters.get("query");
