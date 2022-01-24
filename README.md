@@ -18,9 +18,15 @@ To test the CLI:
 ```shell
 $ java -jar ./target/domino-cli.jar --version
 
+    ___                _
+   /   \___  _ __ ___ (_)_ __   ___
+  / /\ / _ \| '_ ` _ \| | '_ \ / _ \
+ / /_// (_) | | | | | | | | | | (_) |
+/___,' \___/|_| |_| |_|_|_| |_|\___/
+
 Domino CLI 1.0.0
 Copyright 2022, KSM Technology Partners LLC
-Java OpenJDK Runtime Environment 11.0.8+10 Oracle Corporation
+Java OpenJDK Runtime Environment 11.0.10+9 Oracle Corporation
 OS Windows 10 10.0 amd64
 ```
 
