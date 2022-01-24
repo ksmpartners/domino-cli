@@ -86,6 +86,11 @@ public abstract class AbstractDominoCommand implements Runnable {
             return;
         }
 
+        if (o instanceof String) {
+            System.out.println(o);
+            return;
+        }
+
         ObjectMapper mapper;
         switch (parent.getDomino().outputFormat) {
             case TEXT:
