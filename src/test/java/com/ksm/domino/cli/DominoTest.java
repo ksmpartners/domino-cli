@@ -20,7 +20,7 @@ public class DominoTest extends AbstractCliTest {
         // Assert
         Assertions.assertEquals(0, exitCode);
         String output = outputStreamCaptor.toString().trim();
-        String result = StringUtils.trim(StringUtils.substringBefore(output, "\n"));
-        Assertions.assertEquals("Domino CLI UNKNOWN", result);
+        boolean result = StringUtils.containsIgnoreCase(output, "Domino CLI UNKNOWN");
+        Assertions.assertTrue(result, output);
     }
 }
