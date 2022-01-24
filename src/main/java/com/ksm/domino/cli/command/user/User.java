@@ -1,4 +1,6 @@
-package com.ksm.domino.cli.command;
+package com.ksm.domino.cli.command.user;
+
+import com.ksm.domino.cli.command.AbstractParentCommand;
 
 import static picocli.CommandLine.Command;
 

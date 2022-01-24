@@ -61,7 +61,7 @@ public abstract class AbstractDominoCommand implements Runnable {
      *
      * @return the {@@link ApiClient}
      */
-    ApiClient getApiClient() {
+    public ApiClient getApiClient() {
         if (apiClient == null) {
             Domino domino = parent.getDomino();
             HttpClient.Builder httpClient = HttpClient.newBuilder().sslContext(TrustAllManager.createSslContext());
@@ -81,7 +81,7 @@ public abstract class AbstractDominoCommand implements Runnable {
      * @param o object to output to console
      * @throws JsonProcessingException if any error occurs
      */
-    void output(Object o) throws JsonProcessingException {
+    public void output(Object o) throws JsonProcessingException {
         if (o == null) {
             return;
         }

@@ -1,7 +1,8 @@
-package com.ksm.domino.cli.command;
+package com.ksm.domino.cli.command.user;
 
 import com.dominodatalab.api.model.DominoCommonUserPerson;
 import com.dominodatalab.api.rest.UsersApi;
+import com.ksm.domino.cli.command.AbstractDominoCommand;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.LinkedHashMap;

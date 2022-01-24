@@ -1,6 +1,6 @@
 package com.ksm.domino.cli;
 
-import com.ksm.domino.cli.command.User;
+import com.ksm.domino.cli.command.user.User;
 import com.ksm.domino.cli.provider.EnvironmentVariableDefaultProvider;
 import com.ksm.domino.cli.provider.OutputFormat;
 import com.ksm.domino.cli.provider.VersionProvider;
