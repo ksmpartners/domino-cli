@@ -1,5 +1,6 @@
 package com.ksm.domino.cli;
 
+import com.ksm.domino.cli.command.dataset.Dataset;
 import com.ksm.domino.cli.command.user.User;
 import com.ksm.domino.cli.provider.EnvironmentVariableDefaultProvider;
 import com.ksm.domino.cli.provider.OutputFormat;
@@ -18,6 +19,7 @@ import static picocli.CommandLine.*;
         versionProvider = VersionProvider.class,
         defaultValueProvider = EnvironmentVariableDefaultProvider.class,
         subcommands = {
+                Dataset.class,
                 User.class
         })
 public class Domino implements Runnable {
