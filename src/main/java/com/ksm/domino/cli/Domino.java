@@ -2,6 +2,7 @@ package com.ksm.domino.cli;
 
 import com.ksm.domino.cli.command.collaborator.Collaborator;
 import com.ksm.domino.cli.command.dataset.Dataset;
+import com.ksm.domino.cli.command.project.Project;
 import com.ksm.domino.cli.command.user.User;
 import com.ksm.domino.cli.provider.EnvironmentVariableDefaultProvider;
 import com.ksm.domino.cli.provider.OutputFormat;
@@ -22,7 +23,8 @@ import static picocli.CommandLine.*;
         subcommands = {
                 Collaborator.class,
                 Dataset.class,
-                User.class
+                User.class,
+                Project.class
         })
 public class Domino implements Runnable {
 
@@ -46,12 +48,7 @@ public class Domino implements Runnable {
             AnsiConsole.systemInstall(); // enable colors on Windows
         }
 
-        final CommandLine commandLine = new CommandLine(new Domino());
-        commandLine.setCaseInsensitiveEnumValuesAllowed(true);
-        commandLine.setSubcommandsCaseInsensitive(true);
-        commandLine.setOptionsCaseInsensitive(true);
-        int exitCode = commandLine.execute(args);
-
+        int exitCode = new CommandLine(new Domino()).execute(args);
 
         if (SystemUtils.IS_OS_WINDOWS) {
             AnsiConsole.systemUninstall(); // cleanup when done
