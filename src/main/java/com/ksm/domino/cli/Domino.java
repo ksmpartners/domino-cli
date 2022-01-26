@@ -48,7 +48,11 @@ public class Domino implements Runnable {
             AnsiConsole.systemInstall(); // enable colors on Windows
         }
 
-        int exitCode = new CommandLine(new Domino()).execute(args);
+        final CommandLine commandLine = new CommandLine(new Domino());
+        commandLine.setCaseInsensitiveEnumValuesAllowed(true);
+        commandLine.setSubcommandsCaseInsensitive(true);
+        commandLine.setOptionsCaseInsensitive(true);
+        int exitCode = commandLine.execute(args);
 
         if (SystemUtils.IS_OS_WINDOWS) {
             AnsiConsole.systemUninstall(); // cleanup when done
