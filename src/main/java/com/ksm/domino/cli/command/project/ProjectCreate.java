@@ -50,13 +50,14 @@ public class ProjectCreate extends AbstractDominoCommand {
             });
         }
 
-        DominoNucleusProjectModelsNewProject hardProject = new DominoNucleusProjectModelsNewProject();
-        hardProject.setName(projectName);
-        hardProject.setDescription(description);
-        hardProject.setVisibility(DominoNucleusProjectModelsNewProject.VisibilityEnum.PRIVATE);
-        hardProject.setOwnerId(ownerId);
-        hardProject.setTags(tags);
-        hardProject.setCollaborators(collaboratorDTOS);
+        DominoNucleusProjectModelsNewProject newProject = DominoNucleusProjectModelsNewProject.builder()
+                .name(projectName)
+                .description(description)
+                .visibility(DominoNucleusProjectModelsNewProject.VisibilityEnum.PRIVATE)
+                .ownerId(ownerId)
+                .tags(tags)
+                .collaborators(collaboratorDTOS)
+                .build();
 
         if (parameters.containsKey("mainRepoUrl")) {
             String mainRepoUrl = parameters.get("mainRepoUrl");
@@ -73,11 +74,11 @@ public class ProjectCreate extends AbstractDominoCommand {
             gitRepositoryTemp.setCredentialId(credentialId);
             gitRepositoryTemp.setDefaultRef(defaultRef);
 
-            hardProject.setMainRepository(gitRepositoryTemp);
+            newProject.setMainRepository(gitRepositoryTemp);
         }
 
         ProjectsApi projectsApi = new ProjectsApi(getApiClient());
-        DominoNucleusProjectModelsProject project = projectsApi.createProject(hardProject);
+        DominoNucleusProjectModelsProject project = projectsApi.createProject(newProject);
 
         output(project);
     }
