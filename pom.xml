@@ -140,7 +140,7 @@
                             <generateSupportingFiles>true</generateSupportingFiles>
                             <generateModelTests>false</generateModelTests>
                             <generateApiTests>false</generateApiTests>
-                            <templateDirectory>${project.basedir}/templates</templateDirectory>
+                            <templateDirectory>src/conf/templates</templateDirectory>
                             <configOptions>
                                 <serializableModel>true</serializableModel>
                                 <dateLibrary>java8</dateLibrary>
