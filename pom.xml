@@ -14,6 +14,7 @@
         <picocli.version>4.6.2</picocli.version>
         <jansi.version>2.4.0</jansi.version>
         <jackson.verion>2.13.1</jackson.verion>
+        <lombok.version>1.18.22</lombok.version>
         <open-api-generator.version>5.3.1</open-api-generator.version>
         <junit.version>5.8.2</junit.version>
     </properties>
@@ -69,6 +70,12 @@
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-toml</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>io.swagger</groupId>
@@ -133,9 +140,12 @@
                             <generateSupportingFiles>true</generateSupportingFiles>
                             <generateModelTests>false</generateModelTests>
                             <generateApiTests>false</generateApiTests>
+                            <templateDirectory>src/conf/templates</templateDirectory>
                             <configOptions>
                                 <serializableModel>true</serializableModel>
                                 <dateLibrary>java8</dateLibrary>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <additionalModelTypeAnnotations>@lombok.Builder @lombok.AllArgsConstructor</additionalModelTypeAnnotations>
                             </configOptions>
                         </configuration>
                     </execution>
