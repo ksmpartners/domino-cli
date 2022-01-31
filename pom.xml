@@ -15,7 +15,7 @@
         <jansi.version>2.4.0</jansi.version>
         <jackson.verion>2.13.1</jackson.verion>
         <lombok.version>1.18.22</lombok.version>
-        <open-api-generator.version>5.3.1</open-api-generator.version>
+        <open-api-generator.version>5.4.0</open-api-generator.version>
         <junit.version>5.8.2</junit.version>
     </properties>
     <licenses>
