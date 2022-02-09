@@ -11,7 +11,7 @@
         <java.version>11</java.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <commons-text.version>1.9</commons-text.version>
-        <picocli.version>4.6.2</picocli.version>
+        <picocli.version>4.6.3</picocli.version>
         <jansi.version>2.4.0</jansi.version>
         <jackson.verion>2.13.1</jackson.verion>
         <lombok.version>1.18.22</lombok.version>
