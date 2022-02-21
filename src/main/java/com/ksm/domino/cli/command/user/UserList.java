@@ -12,7 +12,7 @@ import java.util.Map;
 import static picocli.CommandLine.Command;
 import static picocli.CommandLine.Parameters;
 
-@Command(name = "list", header = "%n@|green Retrieves a list of users|@")
+@Command(name = "list", header = "%n@|green Retrieves a list of runs for a user|@")
 public class UserList extends AbstractDominoCommand {
 
     @Parameters(description = "@|blue Optional parameters:%n userId=123,456,789%n userName=hsimpson%n query=flanders%n|@%n", mapFallbackValue = "")
