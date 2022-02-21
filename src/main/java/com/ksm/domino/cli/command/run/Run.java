@@ -8,7 +8,8 @@ import picocli.CommandLine;
             commandListHeading = "%nCommands:%n%nThe most commonly used @|bold 'run'|@ commands are:%n",
             header = "%n@|green Run related functions|@",
             subcommands = {
-                        RunRecent.class
+                        RunRecent.class,
+                        RunList.class
             })
 public class Run extends AbstractParentCommand {
 }
