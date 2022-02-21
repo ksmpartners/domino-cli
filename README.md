@@ -52,7 +52,7 @@ $ java -jar ./target/domino-cli.jar user current
 If you are not using environment variables it would be:
 
 ```shell
-$ java -jar ./target/domino-cli.jar -k YOUR_KEY -u https://domino.yourcompany.com user current
+$ java -jar ./target/domino-cli.jar -k YOUR_KEY -u https://domino.yourcompany.com/v4 user current
 ```
 
 ```json
