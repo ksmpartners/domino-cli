@@ -40,7 +40,7 @@ To add your environment variables in Windows Powershell you can add them like th
 
 ```powershell
 [Environment]::SetEnvironmentVariable("DOMINO_API_KEY", "YOUR_KEY", "User")
-[Environment]::SetEnvironmentVariable("DOMINO_API_URL", "https://domino.yourcompany.com", "User")
+[Environment]::SetEnvironmentVariable("DOMINO_API_URL", "https://domino.yourcompany.com/v4", "User")
 ```
 
 To test it is working run the following command to print out your current user information:
