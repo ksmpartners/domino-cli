@@ -1,5 +1,12 @@
 package com.ksm.domino.cli.command;
 
+import static picocli.CommandLine.Option;
+import static picocli.CommandLine.ParentCommand;
+
+import java.net.http.HttpClient;
+import java.time.Duration;
+
+import org.openapitools.jackson.nullable.JsonNullableModule;
 
 import com.dominodatalab.api.invoker.ApiClient;
 import com.dominodatalab.api.invoker.ApiException;
@@ -13,13 +20,6 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.ksm.domino.cli.Domino;
 import com.ksm.domino.cli.provider.TrustAllManager;
-import org.openapitools.jackson.nullable.JsonNullableModule;
-
-import java.net.http.HttpClient;
-import java.time.Duration;
-
-import static picocli.CommandLine.Option;
-import static picocli.CommandLine.ParentCommand;
 
 /**
  * Abstract base class that any command that needs to access Domino should extend.
@@ -49,9 +49,11 @@ public abstract class AbstractDominoCommand implements Runnable {
     public void run() {
         try {
             execute();
-        } catch (ApiException ex) {
+        }
+        catch (ApiException ex) {
             throw new RuntimeException(ex.getMessage());
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -114,6 +116,7 @@ public abstract class AbstractDominoCommand implements Runnable {
         mapper.disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE);
         mapper.registerModule(new JavaTimeModule());
         mapper.registerModule(new JsonNullableModule());
-        System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(o));
+        String result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(o);
+        System.out.println(result);
     }
 }

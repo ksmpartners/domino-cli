@@ -11,10 +11,12 @@ import org.fusesource.jansi.AnsiConsole;
 
 import com.ksm.domino.cli.command.collaborator.Collaborator;
 import com.ksm.domino.cli.command.dataset.Dataset;
+import com.ksm.domino.cli.command.job.Job;
 import com.ksm.domino.cli.command.project.Project;
 import com.ksm.domino.cli.command.run.Run;
 import com.ksm.domino.cli.command.user.User;
 import com.ksm.domino.cli.provider.EnvironmentVariableDefaultProvider;
+import com.ksm.domino.cli.provider.OutputExceptionHandler;
 import com.ksm.domino.cli.provider.OutputFormat;
 import com.ksm.domino.cli.provider.VersionProvider;
 
@@ -29,6 +31,7 @@ import picocli.CommandLine;
             subcommands = {
                         Collaborator.class,
                         Dataset.class,
+                        Job.class,
                         User.class,
                         Project.class,
                         Run.class
@@ -63,6 +66,7 @@ public class Domino implements Runnable {
         commandLine.setCaseInsensitiveEnumValuesAllowed(true);
         commandLine.setSubcommandsCaseInsensitive(true);
         commandLine.setOptionsCaseInsensitive(true);
+        commandLine.setExecutionExceptionHandler(new OutputExceptionHandler());
         int exitCode = commandLine.execute(args);
 
         if (SystemUtils.IS_OS_WINDOWS) {
