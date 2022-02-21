@@ -67,7 +67,7 @@ $ java -jar ./target/domino-cli.jar -k YOUR_KEY -u https://domino.yourcompany.co
 ```
 
 ### Help
-![image](https://user-images.githubusercontent.com/4399574/155019707-31511360-55f0-4254-8d80-856ec61d8bc0.png)
+![image](https://user-images.githubusercontent.com/4399574/155019784-f8e0c22c-3b9f-4eae-b4dd-93ad7af90302.png)
 
 ### License
 
