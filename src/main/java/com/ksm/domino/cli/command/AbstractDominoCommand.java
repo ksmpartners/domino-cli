@@ -5,7 +5,9 @@ import static picocli.CommandLine.ParentCommand;
 
 import java.net.http.HttpClient;
 import java.time.Duration;
+import java.util.Map;
 
+import org.apache.commons.lang3.Validate;
 import org.openapitools.jackson.nullable.JsonNullableModule;
 
 import com.dominodatalab.api.invoker.ApiClient;
@@ -52,6 +54,9 @@ public abstract class AbstractDominoCommand implements Runnable {
         }
         catch (ApiException ex) {
             throw new RuntimeException(ex.getMessage());
+        }
+        catch (IllegalArgumentException ex) {
+            throw ex;
         }
         catch (Exception ex) {
             throw new RuntimeException(ex);
@@ -118,5 +123,12 @@ public abstract class AbstractDominoCommand implements Runnable {
         mapper.registerModule(new JsonNullableModule());
         String result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(o);
         System.out.println(result);
+    }
+
+    public String getRequiredParam(Map<String, String> parameters, String parameterName, String command) {
+        String param = parameters.get(parameterName);
+        Validate.notBlank(param,
+                    String.format("Missing the required parameter '%s' when calling '%s'.", parameterName, command));
+        return param;
     }
 }

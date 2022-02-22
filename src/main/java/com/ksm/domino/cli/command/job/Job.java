@@ -8,7 +8,8 @@ import picocli.CommandLine;
             commandListHeading = "%nCommands:%n%nThe most commonly used @|bold 'job'|@ commands are:%n",
             header = "%n@|green Job related functions|@",
             subcommands = {
-                        JobGet.class
+                        JobGet.class,
+                        JobStart.class
             })
 public class Job extends AbstractParentCommand {
 }
