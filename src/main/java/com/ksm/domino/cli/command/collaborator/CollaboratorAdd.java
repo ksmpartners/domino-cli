@@ -1,19 +1,21 @@
 package com.ksm.domino.cli.command.collaborator;
 
-import com.dominodatalab.api.model.DominoNucleusProjectModelsCollaborator;
-import com.dominodatalab.api.rest.ProjectsApi;
-import com.ksm.domino.cli.command.AbstractDominoCommand;
-import org.apache.commons.lang3.Validate;
-import org.apache.commons.text.WordUtils;
+import static picocli.CommandLine.Command;
+import static picocli.CommandLine.Parameters;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static picocli.CommandLine.Command;
-import static picocli.CommandLine.Parameters;
+import org.apache.commons.text.WordUtils;
+
+import com.dominodatalab.api.model.DominoNucleusProjectModelsCollaborator;
+import com.dominodatalab.api.rest.ProjectsApi;
+import com.ksm.domino.cli.command.AbstractDominoCommand;
 
 @Command(name = "add", header = "%n@|green Adds a user or organization to Project as a collaborator|@")
 public class CollaboratorAdd extends AbstractDominoCommand {
+
+    private static final String NAME = "collaborator add";
 
     @Parameters(description = "@|blue Required parameters:%n projectId=123%n collaboratorId=hsimpson%n role=Contributor%n|@%n", mapFallbackValue = "")
     private final Map<String, String> parameters = new LinkedHashMap<>(3);
@@ -21,12 +23,10 @@ public class CollaboratorAdd extends AbstractDominoCommand {
     @Override
     public void execute() throws Exception {
         // validate parameters
-        String projectId = parameters.get("projectId");
-        String collaboratorId = parameters.get("collaboratorId");
-        String role = WordUtils.capitalize(parameters.get("role"));
-        Validate.notBlank(projectId, "Missing the required parameter 'projectId' when calling collaborator add.");
-        Validate.notBlank(collaboratorId, "Missing the required parameter 'collaboratorId' when calling collaborator add.");
-        Validate.notBlank(role, "Missing the required parameter 'role' when calling collaborator add.");
+        String projectId = getRequiredParam(parameters, "projectId", NAME);
+        String collaboratorId = getRequiredParam(parameters,
+                    DominoNucleusProjectModelsCollaborator.JSON_PROPERTY_COLLABORATOR_ID, NAME);
+        String role = WordUtils.capitalize(getRequiredParam(parameters, "role", NAME));
 
         // create the model object
         final DominoNucleusProjectModelsCollaborator collaborator = new DominoNucleusProjectModelsCollaborator();

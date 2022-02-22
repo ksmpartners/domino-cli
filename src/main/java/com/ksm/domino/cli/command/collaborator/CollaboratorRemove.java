@@ -1,17 +1,19 @@
 package com.ksm.domino.cli.command.collaborator;
 
-import com.dominodatalab.api.rest.ProjectsApi;
-import com.ksm.domino.cli.command.AbstractDominoCommand;
-import org.apache.commons.lang3.Validate;
+import static picocli.CommandLine.Command;
+import static picocli.CommandLine.Parameters;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static picocli.CommandLine.Command;
-import static picocli.CommandLine.Parameters;
+import com.dominodatalab.api.model.DominoNucleusProjectModelsCollaborator;
+import com.dominodatalab.api.rest.ProjectsApi;
+import com.ksm.domino.cli.command.AbstractDominoCommand;
 
 @Command(name = "remove", header = "%n@|green Remove a collaborator from a Project|@")
 public class CollaboratorRemove extends AbstractDominoCommand {
+
+    private static final String NAME = "collaborator remove";
 
     @Parameters(description = "@|blue Required parameters:%n projectId=123%n collaboratorId=hsimpson%n|@%n", mapFallbackValue = "")
     private final Map<String, String> parameters = new LinkedHashMap<>(3);
@@ -19,10 +21,9 @@ public class CollaboratorRemove extends AbstractDominoCommand {
     @Override
     public void execute() throws Exception {
         // validate parameters
-        String projectId = parameters.get("projectId");
-        String collaboratorId = parameters.get("collaboratorId");
-        Validate.notBlank(projectId, "Missing the required parameter 'projectId' when calling collaborator remove.");
-        Validate.notBlank(collaboratorId, "Missing the required parameter 'collaboratorId' when calling collaborator remove.");
+        String projectId = getRequiredParam(parameters, "projectId", NAME);
+        String collaboratorId = getRequiredParam(parameters,
+                    DominoNucleusProjectModelsCollaborator.JSON_PROPERTY_COLLABORATOR_ID, NAME);
 
         // execute the API
         final ProjectsApi api = new ProjectsApi(getApiClient());
