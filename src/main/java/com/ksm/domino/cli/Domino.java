@@ -11,6 +11,7 @@ import org.fusesource.jansi.AnsiConsole;
 
 import com.ksm.domino.cli.command.collaborator.Collaborator;
 import com.ksm.domino.cli.command.dataset.Dataset;
+import com.ksm.domino.cli.command.goals.Goal;
 import com.ksm.domino.cli.command.job.Job;
 import com.ksm.domino.cli.command.project.Project;
 import com.ksm.domino.cli.command.run.Run;
@@ -31,6 +32,7 @@ import picocli.CommandLine;
             subcommands = {
                         Collaborator.class,
                         Dataset.class,
+                        Goal.class,
                         Job.class,
                         User.class,
                         Project.class,
