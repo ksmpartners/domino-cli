@@ -9,7 +9,10 @@ import picocli.CommandLine;
             header = "%n@|green Job related functions|@",
             subcommands = {
                         JobGet.class,
+                        JobLogs.class,
                         JobStart.class,
+                        JobStop.class,
+                        JobRestart.class,
                         JobUpdate.class
             })
 public class Job extends AbstractParentCommand {
