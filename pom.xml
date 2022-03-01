@@ -132,6 +132,7 @@
                         <configuration>
                             <inputSpec>${project.basedir}/src/conf/domino-openapi.json</inputSpec>
                             <skipValidateSpec>true</skipValidateSpec>
+                            <skipIfSpecIsUnchanged>true</skipIfSpecIsUnchanged>
                             <generatorName>java</generatorName>
                             <library>native</library>
                             <apiPackage>com.dominodatalab.api.rest</apiPackage>
