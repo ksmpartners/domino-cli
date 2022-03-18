@@ -30,7 +30,7 @@ public class UserList extends AbstractDominoCommand {
         String query = parameters.get("query");
 
         UsersApi api = new UsersApi(getApiClient());
-        List<DominoCommonUserPerson> users = api.listUsers(userIds, userName, query);
+        List<DominoCommonUserPerson> users = api.listUsers(userIds, userName, query, Boolean.TRUE);
         output(users);
     }
 }

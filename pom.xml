@@ -4,7 +4,7 @@
     <groupId>com.ksmpartners</groupId>
     <artifactId>domino-cli</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>5.1.0-SNAPSHOT</version>
     <name>Domino Data Lab Command Line Interface</name>
     <description>Domino Data Lab Command Line Interface is a client used provision and control Domino.</description>
     <properties>
