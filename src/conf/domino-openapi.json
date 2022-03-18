@@ -232,7 +232,7 @@
             "schema": {
               "nullable": true,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "pageSize",
@@ -243,7 +243,7 @@
             "schema": {
               "nullable": true,
               "format": "int64",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "latestTimeStamp",
@@ -4120,7 +4120,7 @@
               "default": 10000,
               "nullable": true,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "limit",
@@ -4131,7 +4131,7 @@
             "schema": {
               "default": 0,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "offset",
@@ -4211,7 +4211,7 @@
               "default": 10000,
               "nullable": true,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "limit",
@@ -4222,7 +4222,7 @@
             "schema": {
               "default": 0,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "offset",
@@ -14955,7 +14955,7 @@
               "default": 1,
               "nullable": true,
               "format": "int32",
-              "type": "number",
+              "type": "integer",
               "minimum": 1
             },
             "in": "query",
@@ -14968,7 +14968,7 @@
               "default": 20,
               "nullable": true,
               "format": "int32",
-              "type": "number",
+              "type": "integer",
               "minimum": 1
             },
             "in": "query",
@@ -25679,7 +25679,7 @@
             "schema": {
               "nullable": true,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "pageSize",
@@ -25690,7 +25690,7 @@
             "schema": {
               "nullable": true,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "pageNumber",
@@ -25701,7 +25701,7 @@
             "schema": {
               "nullable": true,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "sortOrder",
@@ -25813,7 +25813,7 @@
             "schema": {
               "nullable": true,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "pageSize",
@@ -25824,7 +25824,7 @@
             "schema": {
               "nullable": true,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "pageNumber",
@@ -25835,7 +25835,7 @@
             "schema": {
               "nullable": true,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "sortOrder",
@@ -28318,7 +28318,7 @@
           },
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "startedBy": {
             "nullable": true,
@@ -28449,7 +28449,7 @@
           },
           "createdAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "createdBy": {
             "nullable": true,
@@ -29602,7 +29602,7 @@
           },
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -29985,7 +29985,7 @@
           },
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "invocationCount": {
             "type": "integer",
@@ -30107,7 +30107,7 @@
         "properties": {
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "logType": {
             "type": "string",
@@ -30328,7 +30328,7 @@
           },
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "createdBy": {
             "type": "string",
@@ -30357,7 +30357,7 @@
           },
           "createdAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "projectId": {
             "type": "string",
@@ -30742,7 +30742,7 @@
           },
           "created": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -31013,7 +31013,7 @@
         "properties": {
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "logType": {
             "type": "string",
@@ -31181,7 +31181,7 @@
           },
           "lastModified": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "projectId": {
             "nullable": true,
@@ -31883,7 +31883,7 @@
         "properties": {
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "statusCode": {
             "type": "integer",
@@ -32784,16 +32784,16 @@
         "properties": {
           "submissionTime": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "startTime": {
             "type": "integer",
-            "format": "epoch",
+            "format": "int64",
             "nullable": true
           },
           "completedTime": {
             "type": "integer",
-            "format": "epoch",
+            "format": "int64",
             "nullable": true
           }
         },
@@ -33335,7 +33335,7 @@
           },
           "created": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -34398,7 +34398,7 @@
           },
           "started": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "inputCommitId": {
             "type": "string"
@@ -34521,7 +34521,7 @@
           },
           "lastStageUpdatedAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -34674,11 +34674,11 @@
           },
           "created": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "updatedAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -35178,7 +35178,7 @@
           },
           "created": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "commenter": {
             "nullable": true,
@@ -35186,7 +35186,7 @@
           },
           "updatedAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "dominoEntity": {
             "nullable": true,
@@ -35341,7 +35341,7 @@
           },
           "createdAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "createdBy": {
             "type": "string",
@@ -35349,12 +35349,12 @@
           },
           "lastTitleUpdatedAt": {
             "type": "integer",
-            "format": "epoch",
+            "format": "int64",
             "nullable": true
           },
           "lastDescriptionUpdatedAt": {
             "type": "integer",
-            "format": "epoch",
+            "format": "int64",
             "nullable": true
           }
         },
@@ -35667,7 +35667,7 @@
           },
           "lastTouched": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "datasetId": {
             "type": "string",
@@ -35924,7 +35924,7 @@
           },
           "updatedAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "subTickets": {
             "type": "array",
@@ -36401,7 +36401,7 @@
           },
           "createdAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -36780,7 +36780,7 @@
           },
           "lastSyncInitiatedAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -36902,7 +36902,7 @@
         "properties": {
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "logType": {
             "type": "string",
@@ -37171,7 +37171,7 @@
           },
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "startedBy": {
             "nullable": true,
@@ -37380,7 +37380,7 @@
           },
           "jobStartTime": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "jobTitle": {
             "type": "string"
@@ -38031,7 +38031,7 @@
           },
           "updatedAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "ticketTypes": {
             "type": "array",
@@ -38528,7 +38528,7 @@
         "properties": {
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "cpu": {
             "type": "number",
@@ -38787,7 +38787,7 @@
           },
           "updatedAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "ticketMetadata": {
             "$ref": "#/components/schemas/domino.projectManagement.api.PmTicketMetadata"
@@ -39298,11 +39298,11 @@
           },
           "createdOn": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "lastActivity": {
             "type": "integer",
-            "format": "epoch",
+            "format": "int64",
             "nullable": true
           },
           "collaborators": {
@@ -39378,7 +39378,7 @@
           },
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -39733,7 +39733,7 @@
           },
           "lastModified": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "author": {
             "type": "string"
@@ -40348,7 +40348,7 @@
           },
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -40713,7 +40713,7 @@
           },
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "activityBy": {
             "nullable": true,
@@ -40851,7 +40851,7 @@
           },
           "created": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -40902,7 +40902,7 @@
         "properties": {
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "logType": {
             "type": "string",
@@ -40933,7 +40933,7 @@
         "properties": {
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "cpu": {
             "type": "number",
@@ -41200,7 +41200,7 @@
           },
           "lastModified": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "author": {
             "type": "string"
@@ -41743,7 +41743,7 @@
           },
           "createdAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "projectId": {
             "type": "string",
@@ -41806,7 +41806,7 @@
           },
           "latestTimeStamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -41880,7 +41880,7 @@
           },
           "createdAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "createdBy": {
             "type": "string"
@@ -42195,7 +42195,7 @@
         "properties": {
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "duration": {
             "type": "integer",
@@ -42745,7 +42745,7 @@
           },
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -43042,7 +43042,7 @@
           },
           "blockedAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -43239,16 +43239,16 @@
         "properties": {
           "submissionTime": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "runStartTime": {
             "type": "integer",
-            "format": "epoch",
+            "format": "int64",
             "nullable": true
           },
           "completedTime": {
             "type": "integer",
-            "format": "epoch",
+            "format": "int64",
             "nullable": true
           }
         },
@@ -43344,7 +43344,7 @@
           },
           "started": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "duration": {
             "type": "integer",
@@ -43802,7 +43802,7 @@
           },
           "lastUpdatedAt": {
             "type": "integer",
-            "format": "epoch",
+            "format": "int64",
             "nullable": true
           },
           "owner": {
@@ -44617,7 +44617,7 @@
           },
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
