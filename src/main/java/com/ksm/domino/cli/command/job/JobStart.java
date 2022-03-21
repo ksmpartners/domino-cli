@@ -3,10 +3,9 @@ package com.ksm.domino.cli.command.job;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.dominodatalab.api.model.DominoJobsInterfaceComputeClusterConfigSpecDto;
+import org.apache.commons.lang3.Validate;
 import com.dominodatalab.api.model.DominoJobsInterfaceJob;
 import com.dominodatalab.api.model.DominoJobsWebStartJobRequest;
-import com.dominodatalab.api.model.DominoProjectsApiOnDemandSparkClusterPropertiesSpec;
 import com.dominodatalab.api.model.DominoProjectsApiRepositoriesReferenceDTO;
 import com.dominodatalab.api.rest.JobsApi;
 import com.ksm.domino.cli.command.AbstractDominoCommand;
@@ -43,18 +42,33 @@ public class JobStart extends AbstractDominoCommand {
                     parameters.get(DominoJobsWebStartJobRequest.JSON_PROPERTY_OVERRIDE_HARDWARE_TIER_ID));
         request.setDataSetMountConfigName(
                     parameters.get(DominoJobsWebStartJobRequest.JSON_PROPERTY_DATA_SET_MOUNT_CONFIG_NAME));
-        request.setEnvironmentRevisionSpec(DominoJobsWebStartJobRequest.JSON_PROPERTY_ENVIRONMENT_REVISION_SPEC);
+        request.setEnvironmentRevisionSpec("ActiveRevision");
         
         DominoProjectsApiRepositoriesReferenceDTO mainRepoGitRef = new DominoProjectsApiRepositoriesReferenceDTO();
         mainRepoGitRef.setType(parameters.get(DominoJobsWebStartJobRequest.JSON_PROPERTY_MAIN_REPO_GIT_REF +
                     DominoProjectsApiRepositoriesReferenceDTO.JSON_PROPERTY_TYPE));
-        mainRepoGitRef.setType(parameters.get(DominoJobsWebStartJobRequest.JSON_PROPERTY_MAIN_REPO_GIT_REF +
+        mainRepoGitRef.setValue(parameters.get(DominoJobsWebStartJobRequest.JSON_PROPERTY_MAIN_REPO_GIT_REF +
                     DominoProjectsApiRepositoriesReferenceDTO.JSON_PROPERTY_VALUE));
+        // type and value are required values of mainRepoGitRef - if DNE, override with null
+        if (mainRepoGitRef.getType() == null && mainRepoGitRef.getValue() == null) {
+            mainRepoGitRef = null;
+        } else {
+
+            Validate.notBlank(mainRepoGitRef.getType(),
+                    String.format("Missing the required parameter '%s' when calling '%s' and '%s' is defined.", DominoJobsWebStartJobRequest.JSON_PROPERTY_MAIN_REPO_GIT_REF +
+                    DominoProjectsApiRepositoriesReferenceDTO.JSON_PROPERTY_TYPE, NAME, DominoJobsWebStartJobRequest.JSON_PROPERTY_MAIN_REPO_GIT_REF +
+                    DominoProjectsApiRepositoriesReferenceDTO.JSON_PROPERTY_VALUE));
+
+            Validate.notBlank(mainRepoGitRef.getValue(),
+                    String.format("Missing the required parameter '%s' when calling '%s' and '%s' is defined.", DominoJobsWebStartJobRequest.JSON_PROPERTY_MAIN_REPO_GIT_REF +
+                    DominoProjectsApiRepositoriesReferenceDTO.JSON_PROPERTY_VALUE, NAME, DominoJobsWebStartJobRequest.JSON_PROPERTY_MAIN_REPO_GIT_REF +
+                    DominoProjectsApiRepositoriesReferenceDTO.JSON_PROPERTY_TYPE));
+        }
         request.setMainRepoGitRef(mainRepoGitRef);
 
         // unused
-        request.setComputeClusterProperties(new DominoJobsInterfaceComputeClusterConfigSpecDto());
-        request.setOnDemandSparkClusterProperties(new DominoProjectsApiOnDemandSparkClusterPropertiesSpec());
+        request.setComputeClusterProperties(null);
+        request.setOnDemandSparkClusterProperties(null);
 
         return request;
     }
