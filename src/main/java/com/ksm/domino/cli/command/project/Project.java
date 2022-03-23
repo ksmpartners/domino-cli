@@ -10,6 +10,8 @@ import picocli.CommandLine;
             header = "%n@|green Project related functions|@",
             subcommands = {
                         ProjectCreate.class,
+                        ProjectMountGit.class,
+                        ProjectUnmountGit.class,
                         GoalList.class
             })
 public class Project extends AbstractParentCommand {
