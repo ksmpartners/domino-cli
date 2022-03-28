@@ -32,7 +32,8 @@
 	],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "java -version",
+	// This should generate the code from openapi-generator at launch
+	"postCreateCommand": "mvn compile",
 
 	"remoteUser": "vscode"
 }

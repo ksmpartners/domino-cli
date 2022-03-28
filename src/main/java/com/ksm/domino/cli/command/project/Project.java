@@ -12,6 +12,7 @@ import picocli.CommandLine;
                         ProjectCreate.class,
                         ProjectMountGit.class,
                         ProjectUnmountGit.class,
+                        ProjectUpdateGit.class,
                         GoalList.class
             })
 public class Project extends AbstractParentCommand {
