@@ -15,7 +15,7 @@
         <picocli.version>4.6.3</picocli.version>
         <jansi.version>2.4.0</jansi.version>
         <jackson.verion>2.13.2.20220328</jackson.verion>
-        <lombok.version>1.18.22</lombok.version>
+        <lombok.version>1.18.24</lombok.version>
         <open-api-generator.version>5.4.0</open-api-generator.version>
         <junit.version>5.8.2</junit.version>
     </properties>
