@@ -12,6 +12,7 @@ import static picocli.CommandLine.Command;
                 UserList.class,
                 UserEnvList.class,
                 UserEnvDelete.class,
+                UserCredentialList.class,
                 UserProjectDependencyGraph.class
         })
 public class User extends AbstractParentCommand {
