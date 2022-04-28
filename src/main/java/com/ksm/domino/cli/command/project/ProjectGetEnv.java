@@ -20,7 +20,6 @@ public class ProjectGetEnv extends AbstractDominoCommand {
     @Override
     public void execute() throws Exception {
         String projectId = getRequiredParam(parameters, "projectId", NAME);
-        parameters.remove("projectId");
 
         ProjectsApi projectsApi = new ProjectsApi(getApiClient());
         DominoCommonModelsEnvironmentVariables result = projectsApi.listProjectEnvironmentVariables(projectId);
