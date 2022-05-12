@@ -3,10 +3,12 @@ package com.ksm.domino.cli.command;
 import static picocli.CommandLine.Option;
 import static picocli.CommandLine.ParentCommand;
 
+import java.net.URI;
 import java.net.http.HttpClient;
 import java.time.Duration;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.openapitools.jackson.nullable.JsonNullableModule;
 
@@ -27,6 +29,11 @@ import com.ksm.domino.cli.provider.TrustAllManager;
  * Abstract base class that any command that needs to access Domino should extend.
  */
 public abstract class AbstractDominoCommand implements Runnable {
+
+    /**
+     * Default target path of the Domino API
+     */
+    public static String DEFAULT_DOMINO_API_BASE_PATH = "/v4";
 
     @Option(names = {"-h", "--help"}, usageHelp = true, description = "Print usage help and exit.")
     private boolean usageHelpRequested;
@@ -77,6 +84,12 @@ public abstract class AbstractDominoCommand implements Runnable {
             client.setReadTimeout(Duration.ofSeconds(domino.timeoutSeconds));
             client.updateBaseUri(domino.apiUrl);
             client.setRequestInterceptor(builder -> builder.setHeader("X-Domino-Api-Key", domino.apiKey));
+
+            String basePath = URI.create(client.getBaseUri()).getRawPath();
+            if (StringUtils.isBlank(basePath)) {
+                client.setBasePath(DEFAULT_DOMINO_API_BASE_PATH);
+            }
+
             apiClient = client;
         }
         return apiClient;

@@ -16,6 +16,7 @@ import com.ksm.domino.cli.command.job.Job;
 import com.ksm.domino.cli.command.project.Project;
 import com.ksm.domino.cli.command.run.Run;
 import com.ksm.domino.cli.command.user.User;
+import com.ksm.domino.cli.command.server.Server;
 import com.ksm.domino.cli.provider.EnvironmentVariableDefaultProvider;
 import com.ksm.domino.cli.provider.OutputExceptionHandler;
 import com.ksm.domino.cli.provider.OutputFormat;
@@ -36,7 +37,8 @@ import picocli.CommandLine;
                         Job.class,
                         User.class,
                         Project.class,
-                        Run.class
+                        Run.class,
+                        Server.class
             })
 public class Domino implements Runnable {
 
