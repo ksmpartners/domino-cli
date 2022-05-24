@@ -16,6 +16,8 @@ import picocli.CommandLine;
 public class JobStart extends AbstractDominoCommand {
 
     private static final String NAME = "job start";
+    private static final String MAIN_REPO_REF_TYPE = "mainRepoGitRefType";
+    private static final String MAIN_REPO_REF_VALUE = "mainRepoGitRefValue";
 
     @CommandLine.Parameters(description = "@|blue Parameters:%n projectId=12345%n environmentId=456%n mainRepoGitRefType=head%n mainRepoGitRefValue=xxx%n commandToRun='test.sh'%n commitId=abe5g43%n overrideHardwareTierId=xxx%n|@%n", mapFallbackValue = "")
     private final Map<String, String> parameters = new LinkedHashMap<>(6);
@@ -45,24 +47,18 @@ public class JobStart extends AbstractDominoCommand {
         request.setEnvironmentRevisionSpec("ActiveRevision");
         
         DominoProjectsApiRepositoriesReferenceDTO mainRepoGitRef = new DominoProjectsApiRepositoriesReferenceDTO();
-        mainRepoGitRef.setType(parameters.get(DominoJobsWebStartJobRequest.JSON_PROPERTY_MAIN_REPO_GIT_REF +
-                    DominoProjectsApiRepositoriesReferenceDTO.JSON_PROPERTY_TYPE));
-        mainRepoGitRef.setValue(parameters.get(DominoJobsWebStartJobRequest.JSON_PROPERTY_MAIN_REPO_GIT_REF +
-                    DominoProjectsApiRepositoriesReferenceDTO.JSON_PROPERTY_VALUE));
+        mainRepoGitRef.setType(parameters.get(MAIN_REPO_REF_TYPE));
+        mainRepoGitRef.setValue(parameters.get(MAIN_REPO_REF_VALUE));
         // type and value are required values of mainRepoGitRef - if DNE, override with null
         if (mainRepoGitRef.getType() == null && mainRepoGitRef.getValue() == null) {
             mainRepoGitRef = null;
         } else {
 
             Validate.notBlank(mainRepoGitRef.getType(),
-                    String.format("Missing the required parameter '%s' when calling '%s' and '%s' is defined.", DominoJobsWebStartJobRequest.JSON_PROPERTY_MAIN_REPO_GIT_REF +
-                    DominoProjectsApiRepositoriesReferenceDTO.JSON_PROPERTY_TYPE, NAME, DominoJobsWebStartJobRequest.JSON_PROPERTY_MAIN_REPO_GIT_REF +
-                    DominoProjectsApiRepositoriesReferenceDTO.JSON_PROPERTY_VALUE));
+                    String.format("Missing the required parameter '%s' when calling '%s' and '%s' is defined.", MAIN_REPO_REF_TYPE, NAME, MAIN_REPO_REF_VALUE));
 
             Validate.notBlank(mainRepoGitRef.getValue(),
-                    String.format("Missing the required parameter '%s' when calling '%s' and '%s' is defined.", DominoJobsWebStartJobRequest.JSON_PROPERTY_MAIN_REPO_GIT_REF +
-                    DominoProjectsApiRepositoriesReferenceDTO.JSON_PROPERTY_VALUE, NAME, DominoJobsWebStartJobRequest.JSON_PROPERTY_MAIN_REPO_GIT_REF +
-                    DominoProjectsApiRepositoriesReferenceDTO.JSON_PROPERTY_TYPE));
+                    String.format("Missing the required parameter '%s' when calling '%s' and '%s' is defined.", MAIN_REPO_REF_VALUE, NAME, MAIN_REPO_REF_TYPE));
         }
         request.setMainRepoGitRef(mainRepoGitRef);
 
