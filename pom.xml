@@ -199,4 +199,40 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>docker</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.google.cloud.tools</groupId>
+                        <artifactId>jib-maven-plugin</artifactId>
+                        <version>3.2.1</version>
+                        <configuration>
+                            <container>
+                                <mainClass>com.ksm.domino.cli.Domino</mainClass>
+                            </container>
+                            <from>
+                                <image>adoptopenjdk:11-jdk-hotspot</image>
+                            </from>
+                            <to>
+                                <image>ksmpartners/domino-cli</image>
+                            </to>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>dockerBuild</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
