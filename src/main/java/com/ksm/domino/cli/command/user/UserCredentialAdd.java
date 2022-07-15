@@ -10,7 +10,7 @@ import com.ksm.domino.cli.command.AbstractDominoCommand;
 import picocli.CommandLine;
 
 import java.io.File;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -47,23 +47,21 @@ public class UserCredentialAdd extends AbstractDominoCommand {
             request.put("domain", providerUrl);
         }
 
-        String credentialsType = getCredentialsType();
-        request.put("accessType", credentialsType);
+        request.put("accessType", getCredentialsType());
 
-        if (credentialsType.equals(TYPE_SSH_KEY)) {
-            request.put("type", SSH_DTO_TYPE);
-
-            String credentialsKeyFile = parameters.get("keyFile");
-            File file = new File(credentialsKeyFile);
-            String privateKey = FileUtils.readFileToString(file, Charset.defaultCharset());
-
-            request.put("key", privateKey);
-
-        } else if (credentialsType.equals(TYPE_TOKEN_KEY)) {
+        if (parameters.containsKey("token")) {
             request.put("type", TOKEN_DTO_TYPE);
 
             String credentialsToken = parameters.get("token");
             request.put("token", credentialsToken);
+        } else if (parameters.containsKey("keyFile")) {
+            request.put("type", SSH_DTO_TYPE);
+
+            String credentialsKeyFile = parameters.get("keyFile");
+            File file = new File(credentialsKeyFile);
+            String privateKey = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
+
+            request.put("key", privateKey);
         }
 
         UsersApi api = new UsersApi(getApiClient());
