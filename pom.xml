@@ -12,6 +12,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <commons-text.version>1.9</commons-text.version>
+        <commons-io.version>2.11.0</commons-io.version>
         <picocli.version>4.6.3</picocli.version>
         <jansi.version>2.4.0</jansi.version>
         <jackson.verion>2.13.3</jackson.verion>
@@ -50,6 +51,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
             <version>${commons-text.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
         </dependency>
         <dependency>
             <groupId>org.fusesource.jansi</groupId>
