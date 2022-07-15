@@ -54,8 +54,6 @@ public class UserCredentialAdd extends AbstractDominoCommand {
             request.put("type", SSH_DTO_TYPE);
 
             String credentialsKeyFile = parameters.get("keyFile");
-            Validate.notBlank(credentialsKeyFile, "Parameter 'keyFile' is required if 'type' is 'key'");
-
             File file = new File(credentialsKeyFile);
             String privateKey = FileUtils.readFileToString(file, Charset.defaultCharset());
 
@@ -65,8 +63,6 @@ public class UserCredentialAdd extends AbstractDominoCommand {
             request.put("type", TOKEN_DTO_TYPE);
 
             String credentialsToken = parameters.get("token");
-            Validate.notBlank(credentialsToken, "Parameter 'token' is required if 'type' is 'token'");
-
             request.put("token", credentialsToken);
         }
 
