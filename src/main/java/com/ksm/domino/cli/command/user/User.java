@@ -12,6 +12,8 @@ import static picocli.CommandLine.Command;
                 UserList.class,
                 UserEnvList.class,
                 UserEnvDelete.class,
+                UserCredentialAdd.class,
+                UserCredentialDelete.class,
                 UserCredentialList.class,
                 UserProjectDependencyGraph.class
         })

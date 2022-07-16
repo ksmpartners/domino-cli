@@ -20,16 +20,22 @@
 		"source=${localEnv:HOME}/.m2,target=/home/vscode/.m2,type=bind,consistency=cached"
 	],
 
-	"settings": {
-		"java.jdt.ls.java.home": "/docker-java-home"
-	},
+	"customizations": {
+		"vscode": {
 
-	"extensions": [
-		"vscjava.vscode-java-pack",
-		// Lombok extension - can be finnicky with VSCode Java
-		// May need to revert to a specific Lombok version, and doesn't work with Java 17
-		"GabrielBB.vscode-lombok"
-	],
+			"settings": {
+			},
+
+			"extensions": [
+				"vscjava.vscode-java-pack",
+				"redhat.fabric8-analytics",
+				// Lombok extension - can be finnicky with VSCode Java
+				// May need to revert to a specific Lombok version, and doesn't work with Java 17
+				"GabrielBB.vscode-lombok"
+			]
+
+		}
+	},
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// This should generate the code from openapi-generator at launch
