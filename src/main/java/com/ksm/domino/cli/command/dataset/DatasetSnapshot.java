@@ -10,7 +10,7 @@ import com.dominodatalab.api.model.DominoDatasetrwApiDatasetRwSnapshotSummaryDto
 import com.dominodatalab.api.rest.DatasetRwApi;
 import com.ksm.domino.cli.command.AbstractDominoCommand;
 
-@Command(name = "mount", header = "%n@|green Retrieves a snapshot of a dataset|@")
+@Command(name = "snapshot", header = "%n@|green Retrieves a snapshot of a dataset|@")
 public class DatasetSnapshot extends AbstractDominoCommand {
 
     private static final String NAME = "dataset snapshot";
