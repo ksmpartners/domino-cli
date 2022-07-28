@@ -9,6 +9,7 @@ import static picocli.CommandLine.Command;
         header = "%n@|green Dataset related functions|@",
         subcommands = {
                 DatasetMount.class,
+                DatasetSnapshot.class,
                 DatasetUnmount.class
         })
 public class Dataset extends AbstractParentCommand {
