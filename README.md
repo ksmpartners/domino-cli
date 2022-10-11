@@ -24,9 +24,9 @@ $ java -jar ./target/domino-cli.jar --version
  / /_// (_) | | | | | | | | | | (_) |
 /___,' \___/|_| |_| |_|_|_| |_|\___/
 
-Domino CLI 5.1.0
+Domino CLI 5.3.0
 Copyright 2022, KSM Technology Partners LLC
-Java OpenJDK Runtime Environment 11.0.10+9 Oracle Corporation
+Java OpenJDK Runtime Environment 11.0.16.1+1 Oracle Corporation
 OS Windows 10 10.0 amd64
 ```
 

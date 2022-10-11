@@ -7,6 +7,7 @@ import org.apache.commons.lang3.Validate;
 import com.dominodatalab.api.model.DominoJobsInterfaceJob;
 import com.dominodatalab.api.model.DominoJobsWebStartJobRequest;
 import com.dominodatalab.api.model.DominoProjectsApiRepositoriesReferenceDTO;
+import com.dominodatalab.api.model.DominoWorkspacesWebLaunchWorkspaceInputsEnvironmentRevisionSpec;
 import com.dominodatalab.api.rest.JobsApi;
 import com.ksm.domino.cli.command.AbstractDominoCommand;
 
@@ -42,9 +43,7 @@ public class JobStart extends AbstractDominoCommand {
         request.setEnvironmentId(parameters.get(DominoJobsWebStartJobRequest.JSON_PROPERTY_ENVIRONMENT_ID));
         request.setOverrideHardwareTierId(
                     parameters.get(DominoJobsWebStartJobRequest.JSON_PROPERTY_OVERRIDE_HARDWARE_TIER_ID));
-        request.setDataSetMountConfigName(
-                    parameters.get(DominoJobsWebStartJobRequest.JSON_PROPERTY_DATA_SET_MOUNT_CONFIG_NAME));
-        request.setEnvironmentRevisionSpec("ActiveRevision");
+        request.setEnvironmentRevisionSpec(new DominoWorkspacesWebLaunchWorkspaceInputsEnvironmentRevisionSpec("ActiveRevision"));
         
         DominoProjectsApiRepositoriesReferenceDTO mainRepoGitRef = new DominoProjectsApiRepositoriesReferenceDTO();
         mainRepoGitRef.setType(parameters.get(MAIN_REPO_REF_TYPE));
