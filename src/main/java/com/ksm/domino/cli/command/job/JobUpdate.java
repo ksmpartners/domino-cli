@@ -23,7 +23,7 @@ public class JobUpdate extends AbstractDominoCommand {
         String jobId = getRequiredParam(parameters, "jobId", NAME);
         String name = getRequiredParam(parameters, DominoJobsWebUpdateJobName.JSON_PROPERTY_NAME, NAME);
         JobsApi api = new JobsApi(getApiClient());
-        DominoJobsWebUpdateJobName request = new DominoJobsWebUpdateJobName(name);
+        DominoJobsWebUpdateJobName request = new DominoJobsWebUpdateJobName().name(name);
         DominoJobsInterfaceJob job = api.updateJob(jobId, request);
         output(job);
     }

@@ -51,14 +51,13 @@ public class ProjectCreate extends AbstractDominoCommand {
             });
         }
 
-        DominoNucleusProjectModelsNewProject newProject = DominoNucleusProjectModelsNewProject.builder()
+        DominoNucleusProjectModelsNewProject newProject = new DominoNucleusProjectModelsNewProject()
                     .name(projectName)
                     .description(description)
                     .visibility(DominoNucleusProjectModelsNewProject.VisibilityEnum.PRIVATE)
                     .ownerId(ownerId)
                     .tags(tags)
-                    .collaborators(collaboratorDTOS)
-                    .build();
+                    .collaborators(collaboratorDTOS);
 
         if (parameters.containsKey("mainRepoUrl")) {
             String mainRepoUrl = parameters.get("mainRepoUrl");
