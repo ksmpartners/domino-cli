@@ -232,7 +232,7 @@
             "schema": {
               "nullable": true,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "pageSize",
@@ -243,7 +243,7 @@
             "schema": {
               "nullable": true,
               "format": "int64",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "latestTimeStamp",
@@ -260,11 +260,11 @@
                   "project",
                   "job",
                   "model_api",
+                  "schedule_job",
+                  "files",
                   "workspace",
                   "comment",
-                  "app",
-                  "schedule_job",
-                  "files"
+                  "app"
                 ]
               }
             },
@@ -696,7 +696,6 @@
             "in": "path",
             "name": "executionId",
             "description": "ID of the execution",
-            "type": "domino.common.DominoId",
             "required": true
           }
         ],
@@ -742,7 +741,6 @@
             "in": "path",
             "name": "executionId",
             "description": "ID of the execution",
-            "type": "domino.common.DominoId",
             "required": true
           }
         ],
@@ -788,7 +786,6 @@
             "in": "path",
             "name": "executionId",
             "description": "ID of the execution",
-            "type": "domino.common.DominoId",
             "required": true
           }
         ],
@@ -2467,8 +2464,12 @@
         "responses": {
           "200": {
             "description": "success",
-            "schema": {
-              "$ref": "#/components/schemas/domino.jobs.interface.CodeInfoDto"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/domino.jobs.interface.CodeInfoDto"
+                }
+              }
             }
           },
           "400": {
@@ -2511,8 +2512,12 @@
         "responses": {
           "200": {
             "description": "success",
-            "schema": {
-              "$ref": "#/components/schemas/domino.jobs.interface.ArtifactsInfoDto"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/domino.jobs.interface.ArtifactsInfoDto"
+                }
+              }
             }
           },
           "400": {
@@ -2546,7 +2551,6 @@
             "in": "path",
             "name": "jobId",
             "description": "ID of the job",
-            "type": "domino.common.DominoId",
             "required": true
           }
         ],
@@ -2592,7 +2596,6 @@
             "in": "path",
             "name": "jobId",
             "description": "ID of the job",
-            "type": "domino.common.DominoId",
             "required": true
           }
         ],
@@ -2638,7 +2641,6 @@
             "in": "path",
             "name": "jobId",
             "description": "ID of the job",
-            "type": "domino.common.DominoId",
             "required": true
           }
         ],
@@ -2684,7 +2686,6 @@
             "in": "path",
             "name": "jobId",
             "description": "ID of the job",
-            "type": "domino.common.DominoId",
             "required": true
           }
         ],
@@ -2730,7 +2731,6 @@
             "in": "path",
             "name": "projectId",
             "description": "ID of the project",
-            "type": "domino.common.DominoId",
             "required": true
           },
           {
@@ -2784,7 +2784,6 @@
             "in": "query",
             "name": "userEmail",
             "description": "Email of the user",
-            "type": "string",
             "required": true
           },
           {
@@ -2795,7 +2794,6 @@
             "in": "query",
             "name": "projectId",
             "description": "Id of the project",
-            "type": "domino.common.DominoId",
             "required": true
           },
           {
@@ -2805,7 +2803,6 @@
             "in": "query",
             "name": "commandParameters",
             "description": "Command parameters that needs to be passed to the job",
-            "type": "string",
             "required": true
           }
         ],
@@ -2848,7 +2845,7 @@
           {
             "schema": {
               "pattern": "^[0-9a-f]{24}$",
-              "type": "domino.common.DominoId"
+              "type": "string"
             },
             "in": "query",
             "name": "projectId",
@@ -2903,7 +2900,7 @@
           {
             "schema": {
               "pattern": "^[0-9a-f]{24}$",
-              "type": "domino.common.DominoId"
+              "type": "string"
             },
             "in": "query",
             "name": "projectId",
@@ -4320,7 +4317,7 @@
               "default": 10000,
               "nullable": true,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "limit",
@@ -4331,7 +4328,7 @@
             "schema": {
               "default": 0,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "offset",
@@ -4411,7 +4408,7 @@
               "default": 10000,
               "nullable": true,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "limit",
@@ -4422,7 +4419,7 @@
             "schema": {
               "default": 0,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "offset",
@@ -4929,7 +4926,6 @@
             "in": "path",
             "name": "projectId",
             "description": "ID of the project",
-            "type": "domino.common.DominoId",
             "required": true
           },
           {
@@ -8402,15 +8398,21 @@
             "in": "header",
             "name": "X-Domino-Api-Key",
             "required": false,
-            "type": "string",
+            "schema": {
+              "type": "string"
+            },
             "description": "API Key"
           }
         ],
         "responses": {
           "200": {
             "description": "success",
-            "schema": {
-              "$ref": "#/components/schemas/domino.common.user.LiteUserResponseDTO"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/domino.common.user.LiteUserResponseDTO"
+                }
+              }
             }
           },
           "400": {
@@ -8442,8 +8444,12 @@
         "responses": {
           "200": {
             "description": "success",
-            "schema": {
-              "type": "boolean"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
             }
           },
           "400": {
@@ -14930,7 +14936,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/domino.common.DominoId"
+                  "type": "string"
                 }
               }
             }
@@ -15188,7 +15194,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "String"
+                  "type": "string"
                 }
               }
             }
@@ -15261,7 +15267,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "String"
+                  "type": "string"
                 }
               }
             }
@@ -15334,7 +15340,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "String"
+                  "type": "string"
                 }
               }
             }
@@ -15398,7 +15404,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "String"
+                  "type": "string"
                 }
               }
             }
@@ -15433,7 +15439,6 @@
             "in": "query",
             "name": "userEmail",
             "description": "Id of the user",
-            "type": "String",
             "required": true
           },
           {
@@ -15444,7 +15449,6 @@
             "in": "query",
             "name": "projectId",
             "description": "Id of the project",
-            "type": "domino.common.DominoId",
             "required": false
           }
         ],
@@ -15540,7 +15544,7 @@
               "default": 1,
               "nullable": true,
               "format": "int32",
-              "type": "number",
+              "type": "integer",
               "minimum": 1
             },
             "in": "query",
@@ -15553,7 +15557,7 @@
               "default": 20,
               "nullable": true,
               "format": "int32",
-              "type": "number",
+              "type": "integer",
               "minimum": 1
             },
             "in": "query",
@@ -16355,7 +16359,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/domino.common.DominoId"
+                  "type": "string"
                 }
               }
             }
@@ -18812,10 +18816,14 @@
         "responses": {
           "200": {
             "description": "success",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/domino.common.modelproduct.AppVersionOverview"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/domino.common.modelproduct.AppVersionOverview"
+                  }
+                }
               }
             }
           },
@@ -20949,7 +20957,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "String"
+                  "type": "string"
                 }
               }
             }
@@ -28738,7 +28746,7 @@
             "schema": {
               "nullable": true,
               "format": "int32",
-              "type": "number",
+              "type": "integer",
               "minimum": 0
             },
             "in": "query",
@@ -28750,7 +28758,7 @@
             "schema": {
               "nullable": true,
               "format": "int32",
-              "type": "number",
+              "type": "integer",
               "minimum": 1
             },
             "in": "query",
@@ -28873,7 +28881,7 @@
             "schema": {
               "nullable": true,
               "format": "int32",
-              "type": "number",
+              "type": "integer",
               "minimum": 0
             },
             "in": "query",
@@ -28885,7 +28893,7 @@
             "schema": {
               "nullable": true,
               "format": "int32",
-              "type": "number",
+              "type": "integer",
               "minimum": 1
             },
             "in": "query",
@@ -29060,8 +29068,12 @@
         "responses": {
           "200": {
             "description": "Request accepted, exporting of image continues offline",
-            "schema": {
-              "$ref": "#/components/schemas/domino.modelmanager.web.ExportVersionStatusWithoutModelResponse"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/domino.modelmanager.web.ExportVersionStatusWithoutModelResponse"
+                }
+              }
             }
           },
           "400": {
@@ -29120,8 +29132,12 @@
         "responses": {
           "200": {
             "description": "Request accepted, exporting of model image continues offline",
-            "schema": {
-              "$ref": "#/components/schemas/domino.modelmanager.api.ModelExportVersionStatus"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/domino.modelmanager.api.ModelExportVersionStatus"
+                }
+              }
             }
           },
           "400": {
@@ -29171,7 +29187,7 @@
             "schema": {
               "nullable": true,
               "format": "int32",
-              "type": "number",
+              "type": "integer",
               "minimum": 1
             },
             "in": "query",
@@ -29183,7 +29199,7 @@
             "schema": {
               "nullable": true,
               "format": "int32",
-              "type": "number",
+              "type": "integer",
               "minimum": 1
             },
             "in": "query",
@@ -29234,8 +29250,12 @@
         "responses": {
           "200": {
             "description": "success",
-            "schema": {
-              "$ref": "#/components/schemas/domino.modelmanager.api.ModelsForUIApiResponse"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/domino.modelmanager.api.ModelsForUIApiResponse"
+                }
+              }
             }
           },
           "400": {
@@ -29275,8 +29295,12 @@
         "responses": {
           "200": {
             "description": "success",
-            "schema": {
-              "$ref": "#/components/schemas/domino.modelmanager.api.responses.ModelPermissionsForUIApiResponse"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/domino.modelmanager.api.responses.ModelPermissionsForUIApiResponse"
+                }
+              }
             }
           },
           "400": {
@@ -29448,10 +29472,14 @@
         "responses": {
           "202": {
             "description": "Request accepted, building of model image continues offline",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/domino.modelmanager.web.BuildModelImageApiResponse"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/domino.modelmanager.web.BuildModelImageApiResponse"
+                  }
+                }
               }
             }
           },
@@ -29567,10 +29595,14 @@
         "responses": {
           "202": {
             "description": "Request accepted, exporting of model image continues offline",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/domino.modelmanager.web.ModelExportVersionStatusApiResponse"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/domino.modelmanager.web.ModelExportVersionStatusApiResponse"
+                  }
+                }
               }
             }
           },
@@ -30004,10 +30036,14 @@
         "responses": {
           "202": {
             "description": "Request accepted, exporting of model image continues offline",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/domino.modelmanager.web.ModelExportVersionStatusApiResponse"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/domino.modelmanager.web.ModelExportVersionStatusApiResponse"
+                  }
+                }
               }
             }
           },
@@ -30067,10 +30103,14 @@
         "responses": {
           "202": {
             "description": "Request accepted, exporting of model image continues offline",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/domino.modelmanager.web.ModelExportVersionStatusApiResponse"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/domino.modelmanager.web.ModelExportVersionStatusApiResponse"
+                  }
+                }
               }
             }
           },
@@ -30130,10 +30170,14 @@
         "responses": {
           "202": {
             "description": "Request accepted, exporting of model image continues offline",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/domino.modelmanager.web.ModelExportVersionStatusApiResponse"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/domino.modelmanager.web.ModelExportVersionStatusApiResponse"
+                  }
+                }
               }
             }
           },
@@ -30174,7 +30218,7 @@
             "schema": {
               "nullable": true,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "pageSize",
@@ -30185,7 +30229,7 @@
             "schema": {
               "nullable": true,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "pageNumber",
@@ -30196,7 +30240,7 @@
             "schema": {
               "nullable": true,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "sortOrder",
@@ -30308,7 +30352,7 @@
             "schema": {
               "nullable": true,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "pageSize",
@@ -30319,7 +30363,7 @@
             "schema": {
               "nullable": true,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "pageNumber",
@@ -30330,7 +30374,7 @@
             "schema": {
               "nullable": true,
               "format": "int32",
-              "type": "number"
+              "type": "integer"
             },
             "in": "query",
             "name": "sortOrder",
@@ -31445,7 +31489,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "#/components/schemas/domino.repoman.domain.GitProviderName",
+              "type": "string",
               "enum": [
                 "github",
                 "gitlab",
@@ -31515,7 +31559,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "#/components/schemas/domino.repoman.domain.GitProviderName",
+              "type": "string",
               "enum": [
                 "github",
                 "gitlab",
@@ -31534,7 +31578,7 @@
           {
             "schema": {
               "pattern": "^[0-9a-f]{24}$",
-              "type": "#/components/schemas/domino.common.DominoId"
+              "type": "string"
             },
             "in": "query",
             "name": "credentialId",
@@ -31576,7 +31620,7 @@
         "parameters": [
           {
             "schema": {
-              "type": "#/components/schemas/domino.repoman.domain.GitProviderName",
+              "type": "string",
               "enum": [
                 "github",
                 "gitlab",
@@ -32666,7 +32710,7 @@
             "type": "string"
           },
           "date": {
-            "type": "date"
+            "type": "string"
           }
         },
         "required": [
@@ -33004,7 +33048,7 @@
           },
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "startedBy": {
             "nullable": true,
@@ -33122,7 +33166,7 @@
           },
           "createdAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "createdBy": {
             "nullable": true,
@@ -33450,7 +33494,7 @@
         ]
       },
       "domino.notifications.Priority": {
-        "type": "String",
+        "type": "string",
         "enum": [
           "Critical",
           "Default"
@@ -34526,7 +34570,7 @@
           },
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -34998,7 +35042,7 @@
           },
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "invocationCount": {
             "type": "integer",
@@ -35115,7 +35159,7 @@
         "properties": {
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "logType": {
             "type": "string",
@@ -35370,7 +35414,7 @@
           },
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "createdBy": {
             "type": "string",
@@ -35435,7 +35479,7 @@
           },
           "createdAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "projectId": {
             "type": "string",
@@ -35593,7 +35637,7 @@
       "domino.projects.api.ProjectPortfolioPaginationFilter": {
         "properties": {
           "pagination": {
-            "type": "domino.apiserverutils.pagination.paginationfilter"
+            "type": "string"
           },
           "sortBy": {
             "type": "string",
@@ -35855,7 +35899,7 @@
           },
           "created": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -36322,7 +36366,7 @@
         "properties": {
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "logType": {
             "type": "string",
@@ -36492,7 +36536,7 @@
           },
           "lastModified": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "projectId": {
             "nullable": true,
@@ -37202,7 +37246,7 @@
         "properties": {
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "statusCode": {
             "type": "integer",
@@ -38127,16 +38171,16 @@
         "properties": {
           "submissionTime": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "startTime": {
             "type": "integer",
-            "format": "epoch",
+            "format": "int64",
             "nullable": true
           },
           "completedTime": {
             "type": "integer",
-            "format": "epoch",
+            "format": "int64",
             "nullable": true
           }
         },
@@ -38736,7 +38780,7 @@
           },
           "created": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -40077,7 +40121,7 @@
           },
           "started": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "inputCommitId": {
             "type": "string"
@@ -40218,7 +40262,7 @@
           },
           "lastStageUpdatedAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -40434,11 +40478,11 @@
           },
           "created": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "updatedAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -40979,7 +41023,7 @@
           },
           "created": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "commenter": {
             "nullable": true,
@@ -40987,7 +41031,7 @@
           },
           "updatedAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "dominoEntity": {
             "nullable": true,
@@ -41125,7 +41169,7 @@
           },
           "createdAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "createdBy": {
             "type": "string",
@@ -41133,12 +41177,12 @@
           },
           "lastTitleUpdatedAt": {
             "type": "integer",
-            "format": "epoch",
+            "format": "int64",
             "nullable": true
           },
           "lastDescriptionUpdatedAt": {
             "type": "integer",
-            "format": "epoch",
+            "format": "int64",
             "nullable": true
           }
         },
@@ -41676,7 +41720,7 @@
           },
           "lastTouched": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "datasetId": {
             "type": "string",
@@ -41939,7 +41983,7 @@
           },
           "updatedAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "subTickets": {
             "type": "array",
@@ -42296,7 +42340,7 @@
           },
           "created": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -42316,7 +42360,7 @@
           "featureViews": {
             "type": "array",
             "items": {
-              "type": "domino.featurestore.model.featureviewrequest"
+              "type": "string"
             }
           }
         },
@@ -42599,7 +42643,7 @@
           },
           "createdAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -43152,7 +43196,7 @@
           },
           "lastSyncInitiatedAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -43321,7 +43365,7 @@
         "properties": {
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "logType": {
             "type": "string",
@@ -43590,7 +43634,7 @@
           },
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "startedBy": {
             "nullable": true,
@@ -43786,7 +43830,7 @@
           },
           "jobStartTime": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "jobTitle": {
             "type": "string"
@@ -44623,7 +44667,7 @@
           },
           "updatedAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "ticketTypes": {
             "type": "array",
@@ -45379,7 +45423,7 @@
           },
           "created": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -45436,7 +45480,7 @@
         "properties": {
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "cpu": {
             "type": "number",
@@ -45725,7 +45769,7 @@
           },
           "updatedAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "ticketMetadata": {
             "$ref": "#/components/schemas/domino.projectManagement.api.PmTicketMetadata"
@@ -46160,11 +46204,11 @@
           },
           "createdOn": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "lastActivity": {
             "type": "integer",
-            "format": "epoch",
+            "format": "int64",
             "nullable": true
           },
           "collaborators": {
@@ -46240,7 +46284,7 @@
           },
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -46517,7 +46561,7 @@
           },
           "lastModified": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "author": {
             "type": "string"
@@ -47238,7 +47282,7 @@
           },
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -47675,7 +47719,7 @@
           },
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "activityBy": {
             "nullable": true,
@@ -47813,7 +47857,7 @@
           },
           "created": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -47864,7 +47908,7 @@
         "properties": {
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "logType": {
             "type": "string",
@@ -47895,7 +47939,7 @@
         "properties": {
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "cpu": {
             "type": "number",
@@ -48302,7 +48346,7 @@
           },
           "lastModified": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "author": {
             "type": "string"
@@ -48907,7 +48951,7 @@
           },
           "createdAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "projectId": {
             "type": "string",
@@ -49028,7 +49072,7 @@
           },
           "latestTimeStamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -49078,7 +49122,7 @@
           },
           "createdAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "createdBy": {
             "type": "string"
@@ -49421,7 +49465,7 @@
         "properties": {
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "duration": {
             "type": "integer",
@@ -49703,7 +49747,7 @@
           },
           "created": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -50080,7 +50124,7 @@
           },
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -50442,7 +50486,7 @@
           },
           "blockedAt": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
@@ -50730,16 +50774,16 @@
         "properties": {
           "submissionTime": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "runStartTime": {
             "type": "integer",
-            "format": "epoch",
+            "format": "int64",
             "nullable": true
           },
           "completedTime": {
             "type": "integer",
-            "format": "epoch",
+            "format": "int64",
             "nullable": true
           }
         },
@@ -50863,7 +50907,7 @@
           },
           "started": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           },
           "duration": {
             "type": "integer",
@@ -51398,7 +51442,7 @@
           },
           "lastUpdatedAt": {
             "type": "integer",
-            "format": "epoch",
+            "format": "int64",
             "nullable": true
           },
           "owner": {
@@ -52439,7 +52483,7 @@
           },
           "timestamp": {
             "type": "integer",
-            "format": "epoch"
+            "format": "int64"
           }
         },
         "required": [
