@@ -48280,7 +48280,7 @@
             "$ref": "#/components/schemas/domino.workspace.api.WorkspaceAdminPageClusterInfo"
           },
           "diskUsage": {
-            "type": "domino.run.api.rundiskusage",
+            "type": "string",
             "nullable": true
           },
           "dataPlaneName": {
