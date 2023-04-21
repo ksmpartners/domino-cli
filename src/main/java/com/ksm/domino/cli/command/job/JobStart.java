@@ -7,7 +7,7 @@ import org.apache.commons.lang3.Validate;
 import com.dominodatalab.api.model.DominoJobsInterfaceJob;
 import com.dominodatalab.api.model.DominoJobsWebStartJobRequest;
 import com.dominodatalab.api.model.DominoProjectsApiRepositoriesReferenceDTO;
-import com.dominodatalab.api.model.DominoWorkspacesWebLaunchWorkspaceInputsEnvironmentRevisionSpec;
+import com.dominodatalab.api.model.DominoScheduledjobApiComputeClusterConfigSpecDtoComputeEnvironmentRevisionSpec;
 import com.dominodatalab.api.rest.JobsApi;
 import com.ksm.domino.cli.command.AbstractDominoCommand;
 
@@ -43,23 +43,21 @@ public class JobStart extends AbstractDominoCommand {
         request.setEnvironmentId(parameters.get(DominoJobsWebStartJobRequest.JSON_PROPERTY_ENVIRONMENT_ID));
         request.setOverrideHardwareTierId(
                     parameters.get(DominoJobsWebStartJobRequest.JSON_PROPERTY_OVERRIDE_HARDWARE_TIER_ID));
-        request.setEnvironmentRevisionSpec(new DominoWorkspacesWebLaunchWorkspaceInputsEnvironmentRevisionSpec("ActiveRevision"));
-        
-        DominoProjectsApiRepositoriesReferenceDTO mainRepoGitRef = new DominoProjectsApiRepositoriesReferenceDTO();
-        mainRepoGitRef.setType(parameters.get(MAIN_REPO_REF_TYPE));
-        mainRepoGitRef.setValue(parameters.get(MAIN_REPO_REF_VALUE));
-        // type and value are required values of mainRepoGitRef - if DNE, override with null
-        if (mainRepoGitRef.getType() == null && mainRepoGitRef.getValue() == null) {
-            mainRepoGitRef = null;
-        } else {
+        request.setEnvironmentRevisionSpec(new DominoScheduledjobApiComputeClusterConfigSpecDtoComputeEnvironmentRevisionSpec("ActiveRevision"));
+
+        if (parameters.containsKey(MAIN_REPO_REF_TYPE) || parameters.containsKey(MAIN_REPO_REF_VALUE)) {
+            DominoProjectsApiRepositoriesReferenceDTO mainRepoGitRef = new DominoProjectsApiRepositoriesReferenceDTO();
+            mainRepoGitRef.setType(parameters.get(MAIN_REPO_REF_TYPE));
+            mainRepoGitRef.setValue(parameters.get(MAIN_REPO_REF_VALUE));
 
             Validate.notBlank(mainRepoGitRef.getType(),
                     String.format("Missing the required parameter '%s' when calling '%s' and '%s' is defined.", MAIN_REPO_REF_TYPE, NAME, MAIN_REPO_REF_VALUE));
 
             Validate.notBlank(mainRepoGitRef.getValue(),
                     String.format("Missing the required parameter '%s' when calling '%s' and '%s' is defined.", MAIN_REPO_REF_VALUE, NAME, MAIN_REPO_REF_TYPE));
+
+            request.setMainRepoGitRef(mainRepoGitRef);
         }
-        request.setMainRepoGitRef(mainRepoGitRef);
 
         // unused
         request.setComputeClusterProperties(null);

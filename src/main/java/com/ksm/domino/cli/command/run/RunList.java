@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.dominodatalab.api.model.DominoScheduledrunApiLegacyScheduledRunDTO;
+import com.dominodatalab.api.model.DominoScheduledjobApiLegacyScheduledRunDTO;
 import com.dominodatalab.api.rest.ScheduledRunsApi;
 import com.ksm.domino.cli.command.AbstractDominoCommand;
 
@@ -22,7 +22,7 @@ public class RunList extends AbstractDominoCommand {
     public void execute() throws Exception {
         String userId = getRequiredParam(parameters, "userId", NAME);
         ScheduledRunsApi api = new ScheduledRunsApi(getApiClient());
-        List<DominoScheduledrunApiLegacyScheduledRunDTO> runs = api.listScheduledRuns(userId);
+        List<DominoScheduledjobApiLegacyScheduledRunDTO> runs = api.listScheduledRuns(userId);
         output(runs);
     }
 }

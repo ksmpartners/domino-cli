@@ -4008,7 +4008,6 @@
             "schema": {
               "nullable": true,
               "type": "string",
-              "$ref": "#/components/schemas/domino.workspace.api.WorkspaceSortableColumns.Value",
               "enum": [
                 "volumeSize",
                 "lastStartTime",
@@ -5304,7 +5303,6 @@
             "schema": {
               "nullable": true,
               "type": "string",
-              "$ref": "#/components/schemas/domino.provenance.api.SortableFields.Value",
               "enum": [
                 "createdAt",
                 "dfsBranch",
@@ -5414,7 +5412,6 @@
             "schema": {
               "nullable": true,
               "type": "string",
-              "$ref": "#/components/schemas/domino.provenance.api.SortableFields.Value",
               "enum": [
                 "createdAt",
                 "dfsBranch",
@@ -26977,9 +26974,7 @@
             "description": "success",
             "content": {
               "application/json": {
-                "schema": {
-                  "type": "#/components/schemas/domino.dataplane.DataPlane"
-                }
+                "$ref": "#/components/schemas/domino.dataplane.DataPlane"
               }
             }
           },
@@ -27022,9 +27017,7 @@
             "description": "success",
             "content": {
               "application/json": {
-                "schema": {
-                  "type": "#/components/schemas/domino.dataplane.DataPlane"
-                }
+                "$ref": "#/components/schemas/domino.dataplane.DataPlane"
               }
             }
           },
@@ -27117,7 +27110,7 @@
     },
     "/tags": {
       "get": {
-        "operationId": "list",
+        "operationId": "callList",
         "tags": [
           "Tags"
         ],
@@ -28144,7 +28137,7 @@
     },
     "/frontend/snippets": {
       "get": {
-        "operationId": "list",
+        "operationId": "callList",
         "tags": [
           "Frontend"
         ],
@@ -31639,7 +31632,7 @@
           {
             "schema": {
               "pattern": "^[0-9a-f]{24}$",
-              "type": "#/components/schemas/domino.common.DominoId"
+              "type": "string"
             },
             "in": "query",
             "name": "credentialId",
@@ -32131,7 +32124,7 @@
     },
     "/gateway/projects": {
       "get": {
-        "operationId": "list",
+        "operationId": "callList",
         "tags": [
           "Gateway",
           "Projects"
@@ -41512,7 +41505,6 @@
       },
       "domino.datasetrw.api.DatasetRwPermission": {
         "type": "string",
-        "properties": {},
         "enum": [
           "DeleteDatasetRwV2",
           "EditSecurityDatasetRwV2",
@@ -42933,7 +42925,8 @@
             "pattern": "^[0-9a-f]{24}$"
           },
           "addedBy": {
-            "type": "collection.immutable.map[domino.common.dominoid,string]"
+            "type": "object",
+            "additionalProperties": true
           },
           "createdAtMillis": {
             "type": "integer",
@@ -45312,7 +45305,7 @@
             "$ref": "#/components/schemas/domino.scheduledjob.api.ComputeClusterConfigSpecDto"
           },
           "volumeSpecificationOverride": {
-            "type": "domino.run.api.volume.runondemandvolumespecification",
+            "type": "string",
             "nullable": true
           }
         },
@@ -46073,7 +46066,7 @@
       "domino.projects.api.AssetPortfolioPaginationFilter": {
         "properties": {
           "pagination": {
-            "type": "domino.apiserverutils.pagination.paginationfilter"
+            "$ref": "#/components/schemas/domino.common.modelproduct.PaginationFilter"
           },
           "sortBy": {
             "type": "string",
@@ -48159,7 +48152,8 @@
             "$ref": "#/components/schemas/domino.scheduledjob.api.ComputeClusterConfigSpecDto"
           },
           "volumeSpecificationOverride": {
-            "type": "domino.run.api.volume.runondemandvolumespecification",
+            "type": "object",
+            "additionalProperties": true,
             "nullable": true
           }
         },
@@ -49324,7 +49318,8 @@
             }
           },
           "modelAccess": {
-            "type": "collection.immutable.map[domino.common.dominoid,domino.server.modelmanager.application.modeldetailsaccess]"
+            "type": "object",
+            "additionalProperties": true
           }
         },
         "required": [
@@ -50592,7 +50587,8 @@
             "$ref": "#/components/schemas/domino.scheduledjob.api.ComputeClusterConfigSpecDto"
           },
           "volumeSpecificationOverride": {
-            "type": "domino.run.api.volume.runondemandvolumespecification",
+            "type": "object",
+            "additionalProperties": true,
             "nullable": true
           }
         },
