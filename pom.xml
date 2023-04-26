@@ -17,7 +17,7 @@
         <jackson.verion>2.15.0</jackson.verion>
         <lombok.version>1.18.26</lombok.version>
         <open-api-generator.version>6.5.0</open-api-generator.version>
-        <junit.version>5.9.2</junit.version>
+        <junit.version>5.9.3</junit.version>
     </properties>
     <licenses>
         <license>
