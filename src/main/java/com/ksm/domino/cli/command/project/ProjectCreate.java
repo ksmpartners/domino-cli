@@ -23,9 +23,9 @@ import picocli.CommandLine;
 public class ProjectCreate extends AbstractDominoCommand {
 
     private static final String NAME = "project create";
-    private static final String REPOSITORY_PROVIDER = "githubEnterprise";
+    private static final String REPOSITORY_PROVIDER = "github";
 
-    @CommandLine.Parameters(description = "@|blue Required Parameters:%nname=projectName%nownerId=6125...%n%nOptional Parameters:%ndescription=\"A project description\"%nmainRepoUrl=https://ghe.foo.com/...%ncredentialId=61de...%nrepoProvider=githubEnterprise%ncollaborators=123,456,789|@")
+    @CommandLine.Parameters(description = "@|blue Required Parameters:%nname=projectName%nownerId=6125...%n%nOptional Parameters:%ndescription=\"A project description\"%nmainRepoUrl=https://github.com/...%ncredentialId=61de...%nrepoProvider=github%ncollaborators=123,456,789|@")
     private final Map<String, String> parameters = new LinkedHashMap<>();
 
     @Override

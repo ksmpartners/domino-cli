@@ -10,6 +10,7 @@ import picocli.CommandLine;
             header = "%n@|green Project related functions|@",
             subcommands = {
                         ProjectCreate.class,
+                        ProjectCopy.class,
                         ProjectMountGit.class,
                         ProjectUnmountGit.class,
                         ProjectUpdateGit.class,
