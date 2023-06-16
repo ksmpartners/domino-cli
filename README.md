@@ -10,8 +10,8 @@
 </div>
 <br>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Java CI](https://img.shields.io/github/actions/workflows/status/ksmpartners/domino-cli/build.yml?branch=main&logo=GitHub&style=for-the-badge)](https://github.com/ksmpartners/domino-cli/actions/workflows/build.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CI](https://github.com/ksmpartners/domino-cli/actions/workflows/build.yml/badge.svg)](https://github.com/ksmpartners/domino-cli/actions/workflows/build.yml)
 
 Domino Data Lab Command Line Interface is a client used provision and control Domino.
 
