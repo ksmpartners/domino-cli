@@ -82,7 +82,9 @@ $ java -jar ./target/domino-cli.jar -k YOUR_KEY -u https://domino.yourcompany.co
 ### License
 
 ***
-Licensed under the MIT License.
+Licensed under the [MIT](https://en.wikipedia.org/wiki/MIT_License) license.
+
+`SPDX-License-Identifier: MIT`
 
 ### Copyright
 
