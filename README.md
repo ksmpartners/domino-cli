@@ -86,6 +86,13 @@ $ java -jar ./target/domino-cli.jar -k YOUR_KEY -u https://domino.yourcompany.co
 # Help
 ![image](https://user-images.githubusercontent.com/4399574/155019857-986e31e4-abc0-4eda-9e96-3ed39c746119.png)
 
+## Releasing
+
+- Run `mvn versions:set -DgenerateBackupPoms=false -DnewVersion=5.5.1` to update all modules versions
+- Commit and push the changes to GitHub
+- In GitHub create a new Release titled `5.5.1` to tag this release
+- Run `mvn clean deploy -Prelease` to push to Maven Central
+
 ### License
 
 ***
