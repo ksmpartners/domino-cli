@@ -85,4 +85,6 @@ $ java -jar ./target/domino-cli.jar -k YOUR_KEY -u https://domino.yourcompany.co
 Licensed under the MIT License.
 
 ### Copyright
+
+***
 © 2023 Domino Data Lab, Inc. Made in San Francisco. 
