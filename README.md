@@ -87,4 +87,4 @@ Licensed under the MIT License.
 ### Copyright
 
 ***
-© 2023 Domino Data Lab, Inc. Made in San Francisco. 
+Domino and Domino Data Lab are © 2023 Domino Data Lab, Inc. Made in San Francisco. 
