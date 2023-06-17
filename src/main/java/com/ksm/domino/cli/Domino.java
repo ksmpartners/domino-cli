@@ -22,8 +22,10 @@ import com.ksm.domino.cli.provider.OutputExceptionHandler;
 import com.ksm.domino.cli.provider.OutputFormat;
 import com.ksm.domino.cli.provider.VersionProvider;
 
+import io.quarkus.picocli.runtime.annotations.TopCommand;
 import picocli.CommandLine;
 
+@TopCommand
 @Command(name = "domino",
             header = "%n@|green Domino CLI|@",
             description = "%n@|blue Domino Data Lab Command Line Interface is a client to used provision and control Domino.|@%n",
