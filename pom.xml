@@ -3,21 +3,13 @@
     <groupId>com.ksmpartners</groupId>
     <artifactId>domino-cli</artifactId>
     <packaging>jar</packaging>
-    <version>5.5.1-SNAPSHOT</version>
+    <version>5.5.1</version>
     <name>Domino Data Lab Command Line Interface</name>
     <description>Domino Data Lab Command Line Interface is a client used provision and control Domino.</description>
+    <url>https://github.com/ksmpartners/domino-cli</url>
     <properties>
         <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <commons-lang3.version>3.12.0</commons-lang3.version>
-        <commons-text.version>1.10.0</commons-text.version>
-        <commons-io.version>2.13.0</commons-io.version>
-        <picocli.version>4.7.4</picocli.version>
-        <jansi.version>2.4.0</jansi.version>
-        <jackson.verion>2.15.2</jackson.verion>
-        <lombok.version>1.18.28</lombok.version>
-        <open-api-generator.version>6.6.0</open-api-generator.version>
-        <junit.version>5.9.3</junit.version>
     </properties>
     <licenses>
         <license>
@@ -36,49 +28,57 @@
         <url>https://github.com/ksmpartners/domino-cli</url>
         <tag>HEAD</tag>
     </scm>
+    <developers>
+        <developer>
+            <id>melloware</id>
+            <name>Emil Lefkof</name>
+            <email>elefkof@ksmpartners.com</email>
+            <roles>
+                <role>Buildmaster</role>
+                <role>Developer</role>
+            </roles>
+            <timezone>America/New_York</timezone>
+        </developer>
+        <developer>
+            <id>mharnish</id>
+            <name>Mike Harnish</name>
+            <email>mharnish@ksmpartners.com</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>America/New_York</timezone>
+        </developer>
+    </developers>
     <dependencies>
+        <dependency>
+            <groupId>com.ksmpartners</groupId>
+            <artifactId>domino-java-client</artifactId>
+            <version>5.5.1</version>
+        </dependency>
         <dependency>
             <groupId>info.picocli</groupId>
             <artifactId>picocli</artifactId>
-            <version>${picocli.version}</version>
+            <version>4.7.4</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>${commons-lang3.version}</version>
+            <version>3.12.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
-            <version>${commons-text.version}</version>
+            <version>1.10.0</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>${commons-io.version}</version>
+            <version>2.13.0</version>
         </dependency>
         <dependency>
             <groupId>org.fusesource.jansi</groupId>
             <artifactId>jansi</artifactId>
-            <version>${jansi.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
-            <version>1.3.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpmime</artifactId>
-            <version>4.5.14</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.4.0</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
@@ -91,28 +91,13 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
+            <version>1.18.28</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>1.6.11</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>jsr305</artifactId>
-            <version>3.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openapitools</groupId>
-            <artifactId>jackson-databind-nullable</artifactId>
-            <version>0.2.6</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>${junit.version}</version>
+            <version>5.9.3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -121,7 +106,7 @@
             <dependency>
                 <groupId>com.fasterxml.jackson</groupId>
                 <artifactId>jackson-bom</artifactId>
-                <version>${jackson.verion}</version>
+                <version>2.15.2</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -136,35 +121,6 @@
                 <configuration>
                     <release>${java.version}</release>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.openapitools</groupId>
-                <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>${open-api-generator.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>${project.basedir}/src/conf/domino-openapi.json</inputSpec>
-                            <skipValidateSpec>true</skipValidateSpec>
-                            <skipIfSpecIsUnchanged>true</skipIfSpecIsUnchanged>
-                            <generatorName>java</generatorName>
-                            <library>native</library>
-                            <apiPackage>com.dominodatalab.api.rest</apiPackage>
-                            <modelPackage>com.dominodatalab.api.model</modelPackage>
-                            <invokerPackage>com.dominodatalab.api.invoker</invokerPackage>
-                            <generateSupportingFiles>true</generateSupportingFiles>
-                            <generateModelTests>false</generateModelTests>
-                            <generateApiTests>false</generateApiTests>
-                            <templateDirectory>src/conf/templates</templateDirectory>
-                            <configOptions>
-                                <dateLibrary>java8</dateLibrary>
-                            </configOptions>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
