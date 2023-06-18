@@ -6,6 +6,7 @@
     <version>5.5.1-SNAPSHOT</version>
     <name>Domino Data Lab Command Line Interface</name>
     <description>Domino Data Lab Command Line Interface is a client used provision and control Domino.</description>
+    <url>https://github.com/ksmpartners/domino-cli</url>
     <properties>
         <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
