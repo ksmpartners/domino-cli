@@ -8,6 +8,7 @@ import java.net.http.HttpClient;
 import java.time.Duration;
 import java.util.Map;
 
+import com.dominodatalab.client.TrustAllManager;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.openapitools.jackson.nullable.JsonNullableModule;
@@ -23,7 +24,6 @@ import com.fasterxml.jackson.dataformat.toml.TomlMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.ksm.domino.cli.Domino;
-import com.ksm.domino.cli.provider.TrustAllManager;
 
 /**
  * Abstract base class that any command that needs to access Domino should extend.
@@ -73,7 +73,7 @@ public abstract class AbstractDominoCommand implements Runnable {
     /**
      * Create the API Client for accessing Domino over HTTP.
      *
-     * @return the {@@link ApiClient}
+     * @return the {@link ApiClient}
      */
     public ApiClient getApiClient() {
         if (apiClient == null) {
