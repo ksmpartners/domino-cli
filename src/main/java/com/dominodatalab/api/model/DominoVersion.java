@@ -6,6 +6,7 @@ import java.util.Date;
 @lombok.Builder
 @lombok.NoArgsConstructor
 @lombok.AllArgsConstructor
+@io.quarkus.runtime.annotations.RegisterForReflection
 public class DominoVersion {
     
     private String buildId;
