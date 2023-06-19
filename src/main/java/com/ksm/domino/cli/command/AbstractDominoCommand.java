@@ -8,7 +8,7 @@ import java.net.http.HttpClient;
 import java.time.Duration;
 import java.util.Map;
 
-import com.ksm.domino.cli.provider.TrustAllManager;
+import com.dominodatalab.client.TrustAllManager;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.openapitools.jackson.nullable.JsonNullableModule;
