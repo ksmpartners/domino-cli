@@ -22,7 +22,7 @@ To use this CLI you will need the following:
 - JDK 11+
 - Domino API Key to an active Domino instance
 
-# Build and Test
+# Build
 
 To build the project requires Apache Maven:
 
@@ -53,14 +53,50 @@ To connect to Domino you will need at least the URL of where your Domino install
 access the API. You can set your variables either as environment variables `DOMINO_API_KEY` and `DOMINO_API_URL` or use
 the command line parameters `-k` and `-u`.
 
+### Linux
+
+To add environment variables in Linux so that they are always available upon login, you can modify the shell configuration file for your user. The specific file you need to edit may vary depending on the shell you are using (e.g., Bash, Zsh). Here are the general steps to add environment variables:
+
+1. Identify the shell you are using: Open a terminal and type `echo $SHELL`. This will display the path to the current shell binary.
+
+2. Open the shell configuration file: Use a text editor to open the configuration file for your shell. Here are some common configuration files for popular shells:
+   - Bash: `~/.bashrc` or `~/.bash_profile`
+   - Zsh: `~/.zshrc` or `~/.zprofile`
+   - Fish: `~/.config/fish/config.fish`
+
+3. Add environment variable assignments: Open the shell configuration file in a text editor and add the following lines at the end:
+
+```shell
+export DOMINO_API_KEY="your_api_key"
+export DOMINO_API_URL="your_api_url"
+```
+
+Replace `"your_api_key"` and `"your_api_url"` with the actual values you want to assign to the environment variables.
+
+4. Save and close the file.
+
+5. Apply the changes: To make the environment variables available in your current terminal session, run the following command in the terminal:
+
+```shell
+source ~/.bashrc
+```
+
+Replace `~/.bashrc` with the actual path to your shell configuration file if you are using a different file.
+
+Now, the environment variables `DOMINO_API_KEY` and `DOMINO_API_URL` will be set every time you log in to your Linux system or open a new terminal session.
+
+### Windows
+
 To add your environment variables in Windows Powershell you can add them like this:
 
 ```powershell
-[Environment]::SetEnvironmentVariable("DOMINO_API_KEY", "YOUR_KEY", "User")
-[Environment]::SetEnvironmentVariable("DOMINO_API_URL", "https://domino.yourcompany.com/v4", "User")
+[Environment]::SetEnvironmentVariable("DOMINO_API_KEY", "your_api_key", "User")
+[Environment]::SetEnvironmentVariable("DOMINO_API_URL", "your_api_url", "User")
 ```
+Replace `"your_api_key"` and `"your_api_url"` with the actual values you want to assign to the environment variables.
 
-To test it is working run the following command to print out your current user information:
+# Test
+To test the CLI is working, run the following command to print out your current user information:
 
 ```shell
 $ java -jar ./target/domino-cli.jar user current
@@ -72,6 +108,7 @@ If you are not using environment variables it would be:
 $ java -jar ./target/domino-cli.jar -k YOUR_KEY -u https://domino.yourcompany.com/v4 user current
 ```
 
+**Output:**
 ```json
 {
   "firstName": "Homer",
@@ -86,21 +123,19 @@ $ java -jar ./target/domino-cli.jar -k YOUR_KEY -u https://domino.yourcompany.co
 # Help
 ![image](https://user-images.githubusercontent.com/4399574/155019857-986e31e4-abc0-4eda-9e96-3ed39c746119.png)
 
-## Releasing
+# Releasing
 
 - Run `mvn versions:set -DgenerateBackupPoms=false -DnewVersion=5.5.1` to update all modules versions
 - Commit and push the changes to GitHub
 - In GitHub create a new Release titled `5.5.1` to tag this release
 - Run `mvn clean deploy -Prelease` to push to Maven Central
 
-### License
+# License
 
-***
 Licensed under the [MIT](https://en.wikipedia.org/wiki/MIT_License) license.
 
 `SPDX-License-Identifier: MIT`
 
-### Copyright
+# Copyright
 
-***
 Domino and Domino Data Lab are © 2023 Domino Data Lab, Inc. Made in San Francisco. 
