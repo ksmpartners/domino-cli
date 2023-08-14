@@ -3,6 +3,7 @@ package com.ksm.domino.cli.command.dataset;
 import static picocli.CommandLine.Command;
 import static picocli.CommandLine.Parameters;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,7 @@ public class DatasetCreate extends AbstractDominoCommand {
         request.projectId(projectId);
         request.datasetName(datasetName);
         request.description(datasetDescription);
+        ArrayList<DominoDatasetrwApiDatasetRwGrant> grants = new ArrayList<>();
 
         String collaboratorId = parameters.get("collaboratorIds");
         List<String> collaboratorIds;
@@ -45,9 +47,11 @@ public class DatasetCreate extends AbstractDominoCommand {
                 DominoDatasetrwApiDatasetRwGrant grant = new DominoDatasetrwApiDatasetRwGrant();
                 grant.setTargetId(id);
                 grant.setTargetRole(TargetRoleEnum.DATASETRWEDITOR);
-                request.addGrantsItem(grant);
+                grants.add(grant);
             });
         }
+        request.setGrants(grants);
+        request.usedForModelMonitoring(Boolean.FALSE);
 
         DatasetRwApi api = new DatasetRwApi(getApiClient());
         DominoDatasetrwApiDatasetRwViewDto result = api.createDataset(request);
