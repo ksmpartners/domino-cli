@@ -8,6 +8,7 @@ import static picocli.CommandLine.Command;
         commandListHeading = "%nCommands:%n%nThe most commonly used @|bold 'dataset'|@ commands are:%n",
         header = "%n@|green Dataset related functions|@",
         subcommands = {
+                DatasetCreate.class,
                 DatasetMount.class,
                 DatasetSnapshot.class,
                 DatasetUnmount.class
