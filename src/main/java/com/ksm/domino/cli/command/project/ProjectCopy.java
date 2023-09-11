@@ -64,7 +64,7 @@ public class ProjectCopy extends AbstractDominoCommand {
         } else if (repoName.isPresent()) {
             Validate.notBlank(repoOwner.orElse(null), "Parameter 'repoOwner' is required if 'repoName' is specified");
             DominoProjectsApiCopiedGitRepoMetadata copySpec = new DominoProjectsApiCopiedGitRepoMetadata();
-            copySpec.setIsPrivate(true);
+            copySpec.setVisibility(DominoProjectsApiCopiedGitRepoMetadata.VisibilityEnum.PRIVATE);
             copySpec.setRepoName(repoName.get());
             copySpec.setOwnerName(repoOwner.get());
             gitObject.setCopySpec(copySpec);

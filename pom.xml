@@ -3,7 +3,7 @@
     <groupId>com.ksmpartners</groupId>
     <artifactId>domino-cli</artifactId>
     <packaging>jar</packaging>
-    <version>5.5.1</version>
+    <version>5.7.0-SNAPSHOT</version>
     <name>Domino Data Lab Command Line Interface</name>
     <description>Domino Data Lab Command Line Interface is a client used provision and control Domino.</description>
     <url>https://github.com/ksmpartners/domino-cli</url>
@@ -68,7 +68,7 @@
         <dependency>
             <groupId>com.ksmpartners</groupId>
             <artifactId>quarkus-domino-client</artifactId>
-            <version>5.5.1</version>
+            <version>5.7.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -329,7 +329,7 @@
                     <plugin>
                         <groupId>org.jreleaser</groupId>
                         <artifactId>jreleaser-maven-plugin</artifactId>
-                        <version>1.7.0</version>
+                        <version>1.8.0</version>
                         <configuration>
                             <jreleaser>
                                 <release>
