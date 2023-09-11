@@ -48,7 +48,7 @@ jobs:
           then
             NEXT_VERSION=$COMPUTED_NEXT_VERSION
           fi
-          ./mvnw -B -ntp -ntp versions:set versions:commit -DnewVersion=$RELEASE_VERSION
+          mvn -B -ntp -ntp versions:set versions:commit -DnewVersion=$RELEASE_VERSION
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --global user.name "GitHub Action"
           git commit -a -m "🏁 Releasing version $RELEASE_VERSION"
@@ -88,10 +88,10 @@ jobs:
           restore-keys: ${{ runner.os }}-maven-
 
       - name: 'Build Native Image'
-        run: ./mvnw -B -ntp --file pom.xml -Pnative package
+        run: mvn -B -ntp --file pom.xml -Pnative package
 
       - name: 'Create distribution'
-        run: ./mvnw -B -ntp --file pom.xml -Pdist package -DskipTests
+        run: mvn -B -ntp --file pom.xml -Pdist package -DskipTests
 
       - name: 'Upload build artifact'
         uses: actions/upload-artifact@v3
@@ -131,11 +131,11 @@ jobs:
       - name: 'Release with JReleaser'
         env:
           JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./mvnw -B -ntp --file pom.xml -Prelease -DartifactsDir=artifacts jreleaser:full-release
+        run: mvn -B -ntp --file pom.xml -Prelease -DartifactsDir=artifacts jreleaser:full-release
           
       - name: 'Set next version'
         run: |
-          ./mvnw -B -ntp versions:set versions:commit -DnewVersion=${{ needs.precheck.outputs.NEXT_VERSION }}
+          mvn -B -ntp versions:set versions:commit -DnewVersion=${{ needs.precheck.outputs.NEXT_VERSION }}
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --global user.name "GitHub Action"
           git commit -a -m "⬆️  Next version $NEXT_VERSION"
