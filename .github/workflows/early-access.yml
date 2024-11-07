@@ -109,7 +109,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: artifacts
-          path: ./artifacts
+          path: ../../artifacts
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -127,4 +127,4 @@ jobs:
       - name: Release with JReleaser
         env:
           JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: mvn -B -ntp --file pom.xml -Prelease -DartifactsDir=./artifacts jreleaser:full-release
+        run: mvn -B -ntp --file pom.xml -Prelease -DartifactsDir=artifacts jreleaser:full-release
