@@ -18,9 +18,13 @@ import com.dominodatalab.api.rest.ProjectsApi;
 import com.ksm.domino.cli.command.AbstractDominoCommand;
 
 import picocli.CommandLine;
+import picocli.CommandLine.ParentCommand;
 
 @CommandLine.Command(name = "create", header = "%n@|green Creates a new project|@")
 public class ProjectCreate extends AbstractDominoCommand {
+
+    @ParentCommand
+    private Project parent;    
 
     private static final String NAME = "project create";
     private static final String REPOSITORY_PROVIDER = "github";
@@ -77,9 +81,9 @@ public class ProjectCreate extends AbstractDominoCommand {
             newProject.setMainRepository(gitRepositoryTemp);
         }
 
-        ProjectsApi projectsApi = new ProjectsApi(getApiClient());
+        ProjectsApi projectsApi = new ProjectsApi(getApiClient(parent.domino));
         DominoNucleusProjectModelsProject project = projectsApi.createProject(newProject);
 
-        output(project);
+        output(project, parent.domino);
     }
 }

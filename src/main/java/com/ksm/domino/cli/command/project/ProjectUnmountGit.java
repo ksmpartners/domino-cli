@@ -7,9 +7,13 @@ import com.dominodatalab.api.rest.ProjectsApi;
 import com.ksm.domino.cli.command.AbstractDominoCommand;
 
 import picocli.CommandLine;
+import picocli.CommandLine.ParentCommand;
 
 @CommandLine.Command(name = "unmount-git", header = "%n@|green Unmounts a secondary git repository from a project|@")
 public class ProjectUnmountGit extends AbstractDominoCommand {
+
+    @ParentCommand
+    private Project parent;    
 
     private static final String NAME = "project unmount-git";
 
@@ -21,8 +25,8 @@ public class ProjectUnmountGit extends AbstractDominoCommand {
         String projectId = getRequiredParam(parameters, "projectId", NAME);
         String repositoryId = getRequiredParam(parameters, "repositoryId", NAME);
 
-        ProjectsApi projectsApi = new ProjectsApi(getApiClient());
+        ProjectsApi projectsApi = new ProjectsApi(getApiClient(parent.domino));
         projectsApi.archiveGitRepoWithHttpInfo(projectId, repositoryId);
-        output(String.format("Repository %s successfully removed from project %s", repositoryId, projectId));
+        output(String.format("Repository %s successfully removed from project %s", repositoryId, projectId), parent.domino);
     }
 }

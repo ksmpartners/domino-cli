@@ -14,16 +14,20 @@ import com.dominodatalab.api.model.DominoVersion;
 import com.ksm.domino.cli.command.AbstractDominoCommand;
 
 import picocli.CommandLine;
+import picocli.CommandLine.ParentCommand;
 
 @CommandLine.Command(name = "version", header = "%n@|green Retrieves the remote version of the Domino server|@")
 public class ServerVersion extends AbstractDominoCommand {
+
+    @ParentCommand
+    private Server parent;
 
     @Override
     public void execute() throws Exception {
 
         ApiResponse<DominoVersion> version = getDominoVersion();
 
-        output(version.getData());
+        output(version.getData(), parent.domino);
     }
 
     /**
@@ -32,7 +36,7 @@ public class ServerVersion extends AbstractDominoCommand {
      * This method is based on generated OpenAPI code for the Domino APIs.
      */
     private ApiResponse<DominoVersion> getDominoVersion() throws ApiException {
-        ApiClient client = getApiClient();
+        ApiClient client = getApiClient(parent.domino);
 
         // Version endpoint is not on the base path like defined API endpoints
         client.setBasePath("");

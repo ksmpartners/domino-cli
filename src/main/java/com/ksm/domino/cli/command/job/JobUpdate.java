@@ -9,9 +9,13 @@ import com.dominodatalab.api.rest.JobsApi;
 import com.ksm.domino.cli.command.AbstractDominoCommand;
 
 import picocli.CommandLine;
+import picocli.CommandLine.ParentCommand;
 
 @CommandLine.Command(name = "update", header = "%n@|green Updates the values of a job like job name.|@")
 public class JobUpdate extends AbstractDominoCommand {
+
+    @ParentCommand
+    private Job parent;    
 
     private static final String NAME = "job update";
 
@@ -22,9 +26,9 @@ public class JobUpdate extends AbstractDominoCommand {
     public void execute() throws Exception {
         String jobId = getRequiredParam(parameters, "jobId", NAME);
         String name = getRequiredParam(parameters, DominoJobsWebUpdateJobName.JSON_PROPERTY_NAME, NAME);
-        JobsApi api = new JobsApi(getApiClient());
+        JobsApi api = new JobsApi(getApiClient(parent.domino));
         DominoJobsWebUpdateJobName request = new DominoJobsWebUpdateJobName().name(name);
         DominoJobsInterfaceJob job = api.updateJob(jobId, request);
-        output(job);
+        output(job, parent.domino);
     }
 }

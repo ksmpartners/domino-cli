@@ -1,13 +1,18 @@
-# .github/release.yml
-
 changelog:
   categories:
-    - title: 🏕 Features
+    - title: Breaking Changes 💥
       labels:
-        - '*'
-      exclude:
-        labels:
-          - dependencies
-    - title: 👒 Dependencies
+        - breaking-change
+    - title: New Features & Enhancements 🎉
+      labels:
+        - new-feature
+        - enhancement
+    - title: Accessibility ♿
+      labels:
+        - accessibility
+    - title: Defects 🐞
+      labels:
+        - "bug"
+    - title: Dependencies 👒 
       labels:
         - dependencies

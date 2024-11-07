@@ -9,9 +9,13 @@ import com.dominodatalab.api.rest.LogsWithProblemSuggestionApi;
 import com.ksm.domino.cli.command.AbstractDominoCommand;
 
 import picocli.CommandLine;
+import picocli.CommandLine.ParentCommand;
 
 @CommandLine.Command(name = "logs", header = "%n@|green Get the suggestion when problem occurs in a job along with the logs.|@")
 public class JobLogs extends AbstractDominoCommand {
+
+    @ParentCommand
+    private Job parent;    
 
     private static final String NAME = "job logs";
 
@@ -25,9 +29,9 @@ public class JobLogs extends AbstractDominoCommand {
         BigDecimal limit = new BigDecimal(parameters.getOrDefault("limit", "10000"));
         BigDecimal offset = new BigDecimal(parameters.getOrDefault("offset", "0"));
         String latestTimeNano = parameters.getOrDefault("latestTimeNano", "0");
-        LogsWithProblemSuggestionApi api = new LogsWithProblemSuggestionApi(getApiClient());
+        LogsWithProblemSuggestionApi api = new LogsWithProblemSuggestionApi(getApiClient(parent.domino));
         DominoJobsInterfaceLogsWithProblemSuggestion log = api.getLogsWithProblemSuggestions(jobId, logType,
                     limit, offset, latestTimeNano);
-        output(log);
+        output(log, parent.domino);
     }
 }

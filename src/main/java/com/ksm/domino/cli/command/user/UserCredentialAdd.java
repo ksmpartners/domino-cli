@@ -1,89 +1,112 @@
 package com.ksm.domino.cli.command.user;
 
-import org.apache.commons.io.FileUtils;
-import com.dominodatalab.api.model.DominoCommonUserPerson;
-import com.dominodatalab.api.model.DominoServerAccountApiGitCredentialAccessorDto;
-import com.dominodatalab.api.rest.GitCredentialsApi;
-import com.dominodatalab.api.rest.UsersApi;
-import com.ksm.domino.cli.command.AbstractDominoCommand;
-
-import picocli.CommandLine;
-
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang3.Validate;
+import org.apache.commons.io.FileUtils;
 
-@CommandLine.Command(name = "add-credentials", header = "%n@|green Adds git credentials to the current user's account|@")
-public class UserCredentialAdd extends AbstractDominoCommand {
+import com.ksm.domino.cli.command.AbstractParentCommand;
 
-    private static final String NAME = "user add-credentials";
-    private static final String REPOSITORY_PROVIDER = "githubEnterprise";
+import picocli.CommandLine;
+import picocli.CommandLine.Option;
+import picocli.CommandLine.ParentCommand;
+import picocli.CommandLine.ScopeType;
 
-    @CommandLine.Parameters(description = "@|blue Required Parameters:%nname=credentialsName%n%nOptional Parameters:%nkeyFile=~/.ssh/id_ed25519%ntoken=ghp_ieaf...%nproviderUrl=ghe.foo.com%nrepoProvider=githubEnterprise|@")
-    private final Map<String, String> parameters = new LinkedHashMap<>();
+@CommandLine.Command(
+    name = "add-credentials", 
+    header = "%n@|green Commands for adding credentials to various Git providers|@",
+    subcommands = {
+        UserCredentialAddBitbucket.class,
+        UserCredentialAddBitbucketServer.class,
+        UserCredentialAddGithub.class,
+        UserCredentialAddGithubEnterprise.class,
+        UserCredentialAddGitlab.class,
+        UserCredentialAddGitlabEnterprise.class,
+        UserCredentialAddGenericGit.class
+    }
+)
 
-    private static final String TYPE_SSH_KEY = "key";
-    private static final String TYPE_TOKEN_KEY = "token";
+public class UserCredentialAdd extends AbstractParentCommand {
 
-    private static final String SSH_DTO_TYPE = "SshGitCredentialDto";
-    private static final String TOKEN_DTO_TYPE = "TokenGitCredentialDto";
+    @ParentCommand
+    User user; 
 
-    @Override
-    public void execute() throws Exception {
-        Map<String, String> request = new LinkedHashMap<>();
-        String credentialsName = getRequiredParam(parameters, "name", NAME);
-        request.put("name", credentialsName);
+    static final String BITBUCKET_PROVIDER = "bitbucket";
+    static final String BITBUCKET_SERVER_PROVIDER = "bitbucketServer";
+    static final String GITHUB_PROVIDER = "github";
+    static final String GITHUB_ENTERPRISE_PROVIDER = "githubEnterprise";
+    static final String GITLAB_PROVIDER = "gitLab";
+    static final String GITLAB_ENTERPRISE_PROVIDER = "gitlabEnterprise";
+    static final String GENERIC_PROVIDER = "unknown";
 
-        String repoProvider = parameters.getOrDefault("repoProvider", REPOSITORY_PROVIDER);
-        request.put("gitServiceProvider", repoProvider);
+    static final String CREDENTIAL_NAME_REQUEST_KEY = "name";
+    static final String PROVIDER_REQUEST_KEY = "gitServiceProvider";
+    static final String DOMAIN_REQUEST_KEY = "domain";
+    static final String ACCESS_TYPE_REQUEST_KEY = "accessType";
+    static final String CREDENTIAL_TYPE_REQUEST_KEY = "type";
+    static final String TOKEN_REQUEST_KEY = "token";
+    static final String SSH_REQUEST_KEY = "key";
+    static final String SSH_PASSPHRASE_REQUEST_KEY = "passphrase";
+    static final String USERNAME_REQUEST_KEY = "username";
+    static final String PASSWORD_REQUEST_KEY = "password";
+    static final String USERPASS_ACCESS_TYPE = "password";
 
-        if (repoProvider.equals(REPOSITORY_PROVIDER)) {
-            String providerUrl = parameters.get("providerUrl");
-            Validate.notBlank(providerUrl, "Parameter 'providerUrl' is required if 'repoProvider' is type 'githubEnterprise'");
+    static final String SSH_DTO_TYPE = "SshGitCredentialDto";
+    static final String TOKEN_DTO_TYPE = "TokenGitCredentialDto";
+    static final String USERPASS_DTO_TYPE = "PasswordGitCredentialDto";
 
-            request.put("domain", providerUrl);
-        }
+    @Option(names = { "-n", "--name" }, description = "The name of the new credential.", required = true, scope = ScopeType.INHERIT)
+    String nameOption;       
 
-        request.put("accessType", getCredentialsType());
-
-        if (parameters.containsKey("token")) {
-            request.put("type", TOKEN_DTO_TYPE);
-
-            String credentialsToken = parameters.get("token");
-            request.put("token", credentialsToken);
-        } else if (parameters.containsKey("keyFile")) {
-            request.put("type", SSH_DTO_TYPE);
-
-            String credentialsKeyFile = parameters.get("keyFile");
-            File file = new File(credentialsKeyFile);
-            String privateKey = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
-
-            request.put("key", privateKey);
-        }
-
-        UsersApi api = new UsersApi(getApiClient());
-        DominoCommonUserPerson user = api.getCurrentUser();
-
-        GitCredentialsApi gitApi = new GitCredentialsApi(getApiClient());
-
-        DominoServerAccountApiGitCredentialAccessorDto result = gitApi.addGitCredential(user.getId(), request);
-
-        output(result);
+    static class SSHCredential {
+        @CommandLine.Option(names= { "--privateKey" }, required = true, description = "Private key file")
+        File privateKey;
+        @CommandLine.Option(names={ "--passphrase" }, required = false, description = "Private key passphrase")
+        String passphrase;
     }
 
-    /**
-     * Domino has two types of git credentials, "key" (SSH private key) and "token" (Personal Access Token)
-     */
-    private String getCredentialsType() {
-        if (parameters.containsKey("token")) {
-            return TYPE_TOKEN_KEY;
-        } else if (parameters.containsKey("keyFile")) {
-            return TYPE_SSH_KEY;
-        } else {
-            throw new IllegalArgumentException("Must provide token or keyFile");
-        }
+    static class UserPassCredential {
+        @CommandLine.Option(names= { "--username" }, required = true, description = "Username")
+        String username;
+        @CommandLine.Option(names= { "--password" }, required = true, description = "Password or PAT")
+        String password;
     }
+
+    static class TokenCredential {
+        @CommandLine.Option(names= { "--pat" }, required = true, description = "Personal access token (PAT)")
+        String token;
+    }
+
+    static Map<String, String> mapSSHCredentials(SSHCredential credential) throws IOException {
+        Map<String, String> request = new HashMap<String, String>();
+        request.put(CREDENTIAL_TYPE_REQUEST_KEY, SSH_DTO_TYPE);
+        request.put(ACCESS_TYPE_REQUEST_KEY, SSH_REQUEST_KEY);
+        String privateKey = FileUtils.readFileToString(credential.privateKey, StandardCharsets.UTF_8);
+        request.put(SSH_REQUEST_KEY, privateKey);
+        if (null != credential.passphrase){
+            request.put(SSH_PASSPHRASE_REQUEST_KEY, credential.passphrase);
+        }
+        return request;
+    }
+
+    static Map<String, String> mapUserPassCredentials(UserPassCredential credential) {
+        Map<String, String> request = new HashMap<String, String>();
+        request.put(CREDENTIAL_TYPE_REQUEST_KEY, USERPASS_DTO_TYPE);
+        request.put(ACCESS_TYPE_REQUEST_KEY, USERPASS_ACCESS_TYPE);
+        request.put(USERNAME_REQUEST_KEY, credential.username);
+        request.put(PASSWORD_REQUEST_KEY, credential.password);
+        return request;
+    }    
+
+    static Map<String, String> mapTokenCredentials(TokenCredential credential) {
+        Map<String, String> request = new HashMap<String, String>();
+        request.put(CREDENTIAL_TYPE_REQUEST_KEY, TOKEN_DTO_TYPE);
+        request.put(ACCESS_TYPE_REQUEST_KEY, TOKEN_REQUEST_KEY);
+        request.put(TOKEN_REQUEST_KEY, credential.token);
+        return request;
+    }        
+
 }

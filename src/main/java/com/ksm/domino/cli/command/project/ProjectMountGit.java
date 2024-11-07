@@ -11,9 +11,13 @@ import com.dominodatalab.api.rest.ProjectsApi;
 import com.ksm.domino.cli.command.AbstractDominoCommand;
 
 import picocli.CommandLine;
+import picocli.CommandLine.ParentCommand;
 
 @CommandLine.Command(name = "mount-git", header = "%n@|green Mounts a secondary git repository to a project|@")
 public class ProjectMountGit extends AbstractDominoCommand {
+    
+    @ParentCommand
+    private Project parent;    
 
     private static final String NAME = "project mount-git";
     private static final String REPOSITORY_PROVIDER = "githubEnterprise";
@@ -48,9 +52,9 @@ public class ProjectMountGit extends AbstractDominoCommand {
         gitRepository.setCredentialId(credentialId);
         gitRepository.setRef(ref);
 
-        ProjectsApi projectsApi = new ProjectsApi(getApiClient());
+        ProjectsApi projectsApi = new ProjectsApi(getApiClient(parent.domino));
         DominoProjectsApiRepositoriesGitRepositoryDTO repository = projectsApi.addGitRepoWithHttpInfo(projectId, gitRepository).getData();
 
-        output(repository);
+        output(repository, parent.domino);
     }
 }

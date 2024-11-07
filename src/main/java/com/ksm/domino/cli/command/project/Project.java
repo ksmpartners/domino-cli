@@ -1,9 +1,10 @@
 package com.ksm.domino.cli.command.project;
 
+import com.ksm.domino.cli.Domino;
 import com.ksm.domino.cli.command.AbstractParentCommand;
-import com.ksm.domino.cli.command.goals.GoalList;
 
 import picocli.CommandLine;
+import picocli.CommandLine.ParentCommand;
 
 @CommandLine.Command(name = "project",
             commandListHeading = "%nCommands:%n%nThe most commonly used 'project' commands are:%n",
@@ -15,8 +16,9 @@ import picocli.CommandLine;
                         ProjectUnmountGit.class,
                         ProjectUpdateGit.class,
                         ProjectSetEnv.class,
-                        ProjectGetEnv.class,
-                        GoalList.class
+                        ProjectGetEnv.class
             })
 public class Project extends AbstractParentCommand {
+    @ParentCommand
+    Domino domino; // picocli injects reference to parent command       
 }

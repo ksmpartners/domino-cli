@@ -10,8 +10,13 @@ import com.dominodatalab.api.model.DominoNucleusProjectModelsCollaborator;
 import com.dominodatalab.api.rest.ProjectsApi;
 import com.ksm.domino.cli.command.AbstractDominoCommand;
 
+import picocli.CommandLine.ParentCommand;
+
 @Command(name = "remove", header = "%n@|green Remove a collaborator from a Project|@")
 public class CollaboratorRemove extends AbstractDominoCommand {
+
+    @ParentCommand
+    private Collaborator parent;
 
     private static final String NAME = "collaborator remove";
 
@@ -26,8 +31,8 @@ public class CollaboratorRemove extends AbstractDominoCommand {
                     DominoNucleusProjectModelsCollaborator.JSON_PROPERTY_COLLABORATOR_ID, NAME);
 
         // execute the API
-        final ProjectsApi api = new ProjectsApi(getApiClient());
+        final ProjectsApi api = new ProjectsApi(getApiClient(parent.domino));
         api.removeCollaborator(projectId, collaboratorId);
-        output(String.format("Collaborator %s successfully removed from project %s", collaboratorId, projectId));
+        output(String.format("Collaborator %s successfully removed from project %s", collaboratorId, projectId), parent.domino);
     }
 }

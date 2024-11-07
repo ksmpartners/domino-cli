@@ -12,8 +12,13 @@ import com.dominodatalab.api.model.DominoNucleusProjectModelsCollaborator;
 import com.dominodatalab.api.rest.ProjectsApi;
 import com.ksm.domino.cli.command.AbstractDominoCommand;
 
+import picocli.CommandLine.ParentCommand;
+
 @Command(name = "add", header = "%n@|green Adds a user or organization to Project as a collaborator|@")
 public class CollaboratorAdd extends AbstractDominoCommand {
+
+    @ParentCommand
+    private Collaborator parent;
 
     private static final String NAME = "collaborator add";
 
@@ -34,8 +39,8 @@ public class CollaboratorAdd extends AbstractDominoCommand {
         collaborator.setProjectRole(DominoNucleusProjectModelsCollaborator.ProjectRoleEnum.fromValue(role));
 
         // execute the API
-        final ProjectsApi api = new ProjectsApi(getApiClient());
+        final ProjectsApi api = new ProjectsApi(getApiClient(parent.domino));
         final DominoNucleusProjectModelsCollaborator result = api.addCollaborator(projectId, collaborator);
-        output(result);
+        output(result, parent.domino);
     }
 }

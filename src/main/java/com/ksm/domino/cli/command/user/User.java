@@ -1,8 +1,10 @@
 package com.ksm.domino.cli.command.user;
 
+import com.ksm.domino.cli.Domino;
 import com.ksm.domino.cli.command.AbstractParentCommand;
 
-import static picocli.CommandLine.Command;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.ParentCommand;
 
 @Command(name = "user",
         commandListHeading = "%nCommands:%n%nThe most commonly used @|bold 'user'|@ commands are:%n",
@@ -15,8 +17,8 @@ import static picocli.CommandLine.Command;
                 UserCredentialAdd.class,
                 UserCredentialDelete.class,
                 UserCredentialList.class,
-                UserProjectDependencyGraph.class
         })
 public class User extends AbstractParentCommand {
-
+        @ParentCommand
+        Domino domino; // picocli injects reference to parent command   
 }

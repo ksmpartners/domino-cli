@@ -10,9 +10,13 @@ import com.dominodatalab.api.rest.ProjectsApi;
 import com.ksm.domino.cli.command.AbstractDominoCommand;
 
 import picocli.CommandLine;
+import picocli.CommandLine.ParentCommand;
 
 @CommandLine.Command(name = "update-git", header = "%n@|green Updates a git repository ref in a project|@")
 public class ProjectUpdateGit extends AbstractDominoCommand {
+
+    @ParentCommand
+    private Project parent;    
 
     private static final String NAME = "project update-git";
 
@@ -37,9 +41,9 @@ public class ProjectUpdateGit extends AbstractDominoCommand {
             ref.setValue(refValue);
         }
 
-        ProjectsApi projectsApi = new ProjectsApi(getApiClient());
+        ProjectsApi projectsApi = new ProjectsApi(getApiClient(parent.domino));
         projectsApi.updateGitRepositoryDefaultRefWithHttpInfo(projectId, repositoryId, ref);
 
-        output(String.format("Repository %s successfully updated for project %s", repositoryId, projectId));
+        output(String.format("Repository %s successfully updated for project %s", repositoryId, projectId), parent.domino);
     }
 }
