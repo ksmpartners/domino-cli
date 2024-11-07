@@ -129,4 +129,4 @@ jobs:
       - name: 'Release with JReleaser'
         env:
           JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: mvn -B -ntp --file pom.xml -Prelease -DartifactsDir=artifacts jreleaser:full-release
+        run: mvn -B -ntp --file pom.xml -Prelease -DartifactsDir=domino-cli/domino-cli/artifacts jreleaser:full-release
