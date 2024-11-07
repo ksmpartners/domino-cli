@@ -377,15 +377,15 @@
                                         <type>BINARY</type>
                                         <artifacts>
                                             <artifact>
-                                                <path>{{artifactsDir}}/{{distributionName}}-{{projectVersion}}-linux-x86_64.tar.gz</path>
+                                                <path>/home/runner/work/domino-cli/domino-cli/artifacts/{{distributionName}}-{{projectVersion}}-linux-x86_64.tar.gz</path>
                                                 <platform>linux-x86_64</platform>
                                             </artifact>
                                             <artifact>
-                                                <path>{{artifactsDir}}/{{distributionName}}-{{projectVersion}}-windows-x86_64.zip</path>
+                                                <path>/home/runner/work/domino-cli/domino-cli/artifacts/{{distributionName}}-{{projectVersion}}-windows-x86_64.zip</path>
                                                 <platform>windows-x86_64</platform>
                                             </artifact>
                                             <artifact>
-                                                <path>{{artifactsDir}}/{{distributionName}}-{{projectVersion}}-osx-x86_64.zip</path>
+                                                <path>/home/runner/work/domino-cli/domino-cli/artifacts/{{distributionName}}-{{projectVersion}}-osx-x86_64.zip</path>
                                                 <platform>osx-x86_64</platform>
                                             </artifact>
                                         </artifacts>
