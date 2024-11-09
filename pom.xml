@@ -385,7 +385,7 @@
                                                 <platform>windows-x86_64</platform>
                                             </artifact>
                                             <artifact>
-                                                <path>{{artifactsDir}}/{{distributionName}}-{{projectVersion}}-osx-x86_64.zip</path>
+                                                <path>{{artifactsDir}}/{{distributionName}}-{{projectVersion}}-osx-aarch_64.zip</path>
                                                 <platform>osx-x86_64</platform>
                                             </artifact>
                                         </artifacts>
