@@ -108,6 +108,9 @@ jobs:
       - name: Download Build Artifacts
         uses: actions/download-artifact@v4
 
+      - name: List Artifacts
+        run: ls -l artifacts
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
