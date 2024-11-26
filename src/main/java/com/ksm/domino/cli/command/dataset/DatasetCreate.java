@@ -48,9 +48,15 @@ public class DatasetCreate extends AbstractDominoCommand {
         request.description(datasetDescription);
         ArrayList<DominoDatasetrwApiDatasetRwGrant> grants = new ArrayList<>();
 
-        owners.forEach(aggregateGrants(grants, TargetRoleEnum.DATASET_RW_OWNER));
-        editors.forEach(aggregateGrants(grants, TargetRoleEnum.DATASET_RW_EDITOR));
-        readers.forEach(aggregateGrants(grants, TargetRoleEnum.DATASET_RW_READER));
+        if (owners != null) {
+            owners.forEach(aggregateGrants(grants, TargetRoleEnum.DATASET_RW_OWNER));
+        }
+        if (editors != null) {
+            editors.forEach(aggregateGrants(grants, TargetRoleEnum.DATASET_RW_EDITOR));
+        }
+        if (readers != null) {
+            readers.forEach(aggregateGrants(grants, TargetRoleEnum.DATASET_RW_READER));
+        }
         request.setGrants(grants);
         request.usedForModelMonitoring(Boolean.FALSE);
 
