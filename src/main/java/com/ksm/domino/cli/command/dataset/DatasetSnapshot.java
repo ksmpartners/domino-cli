@@ -26,7 +26,7 @@ public class DatasetSnapshot extends AbstractDominoCommand {
     public void execute() throws Exception {
         String snapshotId = getRequiredParam(parameters, "snapshotId", NAME);
         DatasetRwApi api = new DatasetRwApi(getApiClient(parent.domino));
-        DominoDatasetrwApiDatasetRwSnapshotSummaryDto result = api.getSnapshot(snapshotId);
+        DominoDatasetrwApiDatasetRwSnapshotSummaryDto result = api.getSnapshot(snapshotId, Boolean.TRUE);
         output(result, parent.domino);
     }
 }
