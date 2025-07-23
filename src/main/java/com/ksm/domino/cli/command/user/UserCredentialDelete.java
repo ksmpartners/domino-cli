@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.dominodatalab.api.invoker.ApiClient;
-import com.dominodatalab.api.model.DominoCommonUserPerson;
+import com.dominodatalab.api.model.DominoCommonUserPersonWithRoles;
 import com.dominodatalab.api.rest.GitCredentialsApi;
 import com.dominodatalab.api.rest.UsersApi;
 import com.ksm.domino.cli.command.AbstractDominoCommand;
@@ -30,7 +30,7 @@ public class UserCredentialDelete extends AbstractDominoCommand {
         ApiClient apiClient = getApiClient(parent.domino);
 
         UsersApi api = new UsersApi(apiClient);
-        DominoCommonUserPerson user = api.getCurrentUser();
+        DominoCommonUserPersonWithRoles user = api.getCurrentUser();
 
         GitCredentialsApi gitApi = new GitCredentialsApi(apiClient);
         String userId = user.getId();

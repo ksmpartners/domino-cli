@@ -2,7 +2,7 @@ package com.ksm.domino.cli.command.user;
 
 import java.util.List;
 
-import com.dominodatalab.api.model.DominoCommonUserPerson;
+import com.dominodatalab.api.model.DominoCommonUserPersonWithRoles;
 import com.dominodatalab.api.model.DominoServerAccountApiGitCredentialAccessorDto;
 import com.dominodatalab.api.rest.GitCredentialsApi;
 import com.dominodatalab.api.rest.UsersApi;
@@ -20,7 +20,7 @@ public class UserCredentialList extends AbstractDominoCommand {
     @Override
     public void execute() throws Exception {
         UsersApi api = new UsersApi(getApiClient(parent.domino));
-        DominoCommonUserPerson user = api.getCurrentUser();
+        DominoCommonUserPersonWithRoles user = api.getCurrentUser();
 
         GitCredentialsApi gitApi = new GitCredentialsApi(getApiClient(parent.domino));
         List<DominoServerAccountApiGitCredentialAccessorDto> credentials = gitApi.getGitCredentials(user.getId());
