@@ -33,11 +33,13 @@ public class ProjectCopy extends AbstractDominoCommand {
     private static final String PARAM_CREDENTIAL_ID = "credentialId";
     private static final String PARAM_IMPORTED_CREDENTIAL_ID = "importedCredentialId";
     private static final String PARAM_LINK_REPO_URL = "linkRepoUrl";
+    private static final String PARAM_PROJECT_VISIBILITY = "projectVisibility";
     private static final String PARAM_REPO_NAME = "repoName";
     private static final String PARAM_REPO_OWNER = "repoOwner";
+    private static final String PARAM_REPO_VISIBILITY = "repoVisibility";
     private static final String PARAM_COPY_DATASETS = "copyDatasets";
 
-    @CommandLine.Parameters(description = "@|blue Required Parameters:%nname=projectName%nownerId=6125...%nprojectToCopyId=1235...%ncredentialId=6d321...%n%nOptional Parameters:%nimportedCredentialId=6e124...%nlinkRepoUrl=https://github.com/...%nrepoName=domino-project%nrepoOwner=user%ncopyDatasets=true|@")
+    @CommandLine.Parameters(description = "@|blue Required Parameters:%nname=projectName%nownerId=6125...%nprojectToCopyId=1235...%ncredentialId=6d321...%n%nOptional Parameters:%nimportedCredentialId=6e124...%nlinkRepoUrl=https://github.com/...%nrepoName=domino-project%nrepoOwner=user%nrepoVisibility=INTERNAL%nprojectVisibility=SEARCHABLE%ncopyDatasets=true|@")
     private final Map<String, String> parameters = new LinkedHashMap<>();
 
     @Override
@@ -57,6 +59,11 @@ public class ProjectCopy extends AbstractDominoCommand {
         // create new repo
         Optional<String> repoName = Optional.ofNullable(parameters.get(PARAM_REPO_NAME));
         Optional<String> repoOwner = Optional.ofNullable(parameters.get(PARAM_REPO_OWNER));
+        Optional<ProviderRepoVisibilityV1> repoVisibility = Optional.ofNullable(parameters.get(PARAM_REPO_VISIBILITY))
+                .map(ProviderRepoVisibilityV1::fromValue);
+
+        Optional<ProjectVisibilityV1> projectVisibility = Optional.ofNullable(parameters.get(PARAM_PROJECT_VISIBILITY))
+                .map(ProjectVisibilityV1::fromValue);
 
         GitCodeRepoSpecV1 repoSpec = new GitCodeRepoSpecV1();
         repoSpec.setCredentialId(credentialId);
@@ -70,7 +77,7 @@ public class ProjectCopy extends AbstractDominoCommand {
         } else if (repoName.isPresent()) {
             Validate.notBlank(repoOwner.orElse(null), "Parameter 'repoOwner' is required if 'repoName' is specified");
             DeepCopyGitRepoSpecV1 copySpec = new DeepCopyGitRepoSpecV1();
-            copySpec.setVisibility(ProviderRepoVisibilityV1.PRIVATE);
+            copySpec.setVisibility(repoVisibility.orElse(ProviderRepoVisibilityV1.PRIVATE));
             copySpec.setNewRepoName(repoName.get());
             copySpec.setNewRepoOwnerName(repoOwner.get());
 
@@ -84,7 +91,7 @@ public class ProjectCopy extends AbstractDominoCommand {
         request.setName(projectName);
         request.setCopyDatasets(copyDatasets);
         request.setOwnerId(ownerId);
-        request.setVisibility(ProjectVisibilityV1.PRIVATE);
+        request.setVisibility(projectVisibility.orElse(ProjectVisibilityV1.PRIVATE));
         request.setGitCodeRepoSpec(repoSpec);
         request.setImportedGitReposCredentialId(importedCredentialId);
 
