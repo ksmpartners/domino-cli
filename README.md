@@ -86,13 +86,13 @@ Within your Domino Workspace, initiate a Terminal session and execute commands a
 
 ```shell
 # Download the file
-$ wget https://github.com/ksmpartners/domino-cli/releases/download/3.0.0/domino-cli-3.0.0-linux-x86_64.tar.gz
+$ wget https://github.com/ksmpartners/domino-cli/releases/download/6.1.0.0/domino-cli-6.1.0.0-linux-x86_64.tar.gz
 
 # Unzip the downloaded file
-$ tar -xvf domino-cli-3.0.0-linux-x86_64.tar.gz
+$ tar -xvf domino-cli-6.1.0.0-linux-x86_64.tar.gz
 
 # Move the unzipped cli to current directory
-$ mv domino-cli-3.0.0-linux-x86_64/bin/domino-cli .
+$ mv domino-cli-6.1.0.0-linux-x86_64/bin/domino-cli .
 ```
 
 # Test
@@ -175,7 +175,7 @@ Once you have everything installed you can build a Windows native executable wit
 mvn clean package -Pnative
 ```
 
-You will find the fully portable executable in `/target/domino-cli-3.0.0.exe` which you can rename and move to any other Windows machine.
+You will find the fully portable executable in `/target/domino-cli-6.1.0.0.exe` which you can rename and move to any other Windows machine.
 
 # Releasing
 
