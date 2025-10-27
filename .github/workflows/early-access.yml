@@ -106,7 +106,7 @@ jobs:
           fetch-depth: 0
 
       - name: Download Build Artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
 
       - name: List Artifacts
         run: ls -l artifacts
