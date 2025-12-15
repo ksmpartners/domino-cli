@@ -93,7 +93,7 @@ jobs:
         run: mvn -B -ntp --file pom.xml -Pdist package -DskipTests
 
       - name: 'Upload build artifact'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: artifacts-${{ matrix.os }}
           path: |
@@ -106,7 +106,7 @@ jobs:
     needs: [ build ]
     steps:
       - name: Merge Artifacts
-        uses: actions/upload-artifact/merge@v5
+        uses: actions/upload-artifact/merge@v6
         with:
           name: artifacts
           pattern:  artifacts-*
