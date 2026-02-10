@@ -24,13 +24,20 @@ To use this CLI you will need to download the binary for your operating system s
 on our [Releases](https://github.com/ksmpartners/domino-cli/releases) page.
 
 - Binary for your OS found here: https://github.com/ksmpartners/domino-cli/releases
-- Domino API Key to an active Domino instance
+- A service account token to an active Domino instance
+
+> [!IMPORTANT]
+> In a future release of Domino, Domino API Keys will be fully deprecated. These are being phased out for Domino Users.
+> To access the API from outside of Domino, a Domino Service Account must be configured by a SysAdmin and a token generated for it. This will be the main authorization mechanism moving forward.
+>
+> See the following article for more details:
+> https://support.domino.ai/support/s/article/Deprecation-of-API-Keys-as-an-Authentication-Method
 
 # Domino Settings
 
-To connect to Domino you will need at least the URL of where your Domino installation is and a personal API key to
-access the API. You can set your variables either as environment variables `DOMINO_API_KEY` and `DOMINO_API_URL` or use
-the command line parameters `-k` and `-u`.
+To connect to Domino you will need at least the URL of your Domino installation and a service account token to
+access the API. You can set your variables either as environment variables `DOMINO_API_TOKEN` and `DOMINO_API_URL` or use
+the command line parameters `-a` and `-u`.
 
 ### Linux
 
@@ -47,11 +54,11 @@ To add environment variables in Linux so that they are always available upon log
 3. Add environment variable assignments: Open the shell configuration file in a text editor and add the following lines at the end:
 
 ```shell
-export DOMINO_API_KEY="your_api_key"
+export DOMINO_API_TOKEN="your_api_token"
 export DOMINO_API_URL="your_api_url"
 ```
 
-Replace `"your_api_key"` and `"your_api_url"` with the actual values you want to assign to the environment variables.
+Replace `"your_api_token"` and `"your_api_url"` with the actual values you want to assign to the environment variables.
 
 4. Save and close the file.
 
@@ -63,22 +70,22 @@ source ~/.bashrc
 
 Replace `~/.bashrc` with the actual path to your shell configuration file if you are using a different file.
 
-Now, the environment variables `DOMINO_API_KEY` and `DOMINO_API_URL` will be set every time you log in to your Linux system or open a new terminal session.
+Now, the environment variables `DOMINO_API_TOKEN` and `DOMINO_API_URL` will be set every time you log in to your Linux system or open a new terminal session.
 
 ### Windows
 
 To add your environment variables in Windows Powershell you can add them like this:
 
 ```powershell
-[Environment]::SetEnvironmentVariable("DOMINO_API_KEY", "your_api_key", "User")
+[Environment]::SetEnvironmentVariable("DOMINO_API_TOKEN", "your_api_token", "User")
 [Environment]::SetEnvironmentVariable("DOMINO_API_URL", "your_api_url", "User")
 ```
 
-Replace `"your_api_key"` and `"your_api_url"` with the actual values you want to assign to the environment variables.
+Replace `"your_api_token"` and `"your_api_url"` with the actual values you want to assign to the environment variables.
 
 # Domino Workspace
 
-If you're operating within a Domino Workspace, accessing and utilizing the CLI requires minimal setup. Being within the workspace ensures that the CLI seamlessly integrates with your existing API_KEY and API_URL, eliminating the need for additional configuration. As a result, the CLI functions effortlessly right from the start.
+If you're operating within a Domino Workspace, accessing and utilizing the CLI requires minimal setup. Being within the workspace ensures that the CLI seamlessly integrates with your existing user access and the local Domino workspace proxy, eliminating the need for additional configuration. As a result, the CLI functions effortlessly right from the start.
 
 ## Download
 
@@ -106,7 +113,7 @@ $ ./domino-cli user current
 If you are not using environment variables it would be:
 
 ```shell
-$ ./domino-cli -k YOUR_KEY -u https://domino.yourcompany.com/v4 user current
+$ ./domino-cli -a YOUR_TOKEN -u https://domino.yourcompany.com user current
 ```
 
 **Output:**
