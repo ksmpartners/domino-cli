@@ -59,8 +59,8 @@ public abstract class AbstractDominoCommand implements Runnable {
     public com.dominodatalab.api.invoker.ApiClient getApiClient(Domino domino) {
         com.dominodatalab.api.invoker.ApiClient client = DominoApiClient.createApiClient();
         client.setReadTimeout(Duration.ofSeconds(domino.timeoutSeconds));
-        client.updateBaseUri(domino.apiUrl);
-        client.setRequestInterceptor(builder -> builder.setHeader("X-Domino-Api-Key", domino.apiKey));
+        client.updateBaseUri(domino.getDominoUrl());
+        client.setRequestInterceptor(domino.addDominoAuthorization());
 
         String basePath = URI.create(client.getBaseUri()).getRawPath();
         if (StringUtils.isBlank(basePath)) {
@@ -77,8 +77,8 @@ public abstract class AbstractDominoCommand implements Runnable {
     public com.dominodatalab.pub.invoker.ApiClient getPubClient(Domino domino) {
         com.dominodatalab.pub.invoker.ApiClient client = DominoPublicClient.createApiClient();
         client.setReadTimeout(Duration.ofSeconds(domino.timeoutSeconds));
-        client.updateBaseUri(domino.apiUrl);
-        client.setRequestInterceptor(builder -> builder.setHeader("X-Domino-Api-Key", domino.apiKey));
+        client.updateBaseUri(domino.getDominoUrl());
+        client.setRequestInterceptor(domino.addDominoAuthorization());
         return client;
     }
 

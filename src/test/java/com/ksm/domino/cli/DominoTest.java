@@ -1,6 +1,6 @@
 package com.ksm.domino.cli;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import picocli.CommandLine;
@@ -20,7 +20,7 @@ public class DominoTest extends AbstractCliTest {
         // Assert
         Assertions.assertEquals(0, exitCode);
         String output = outputStreamCaptor.toString().trim();
-        boolean result = StringUtils.containsIgnoreCase(output, "Domino CLI UNKNOWN");
+        boolean result = Strings.CI.contains(output, "Domino CLI UNKNOWN");
         Assertions.assertTrue(result, output);
     }
 }
