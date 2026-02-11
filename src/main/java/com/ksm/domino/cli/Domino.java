@@ -1,12 +1,12 @@
 package com.ksm.domino.cli;
 
-import static picocli.CommandLine.Command;
-import static picocli.CommandLine.Option;
-import static picocli.CommandLine.ScopeType;
-import static picocli.CommandLine.Spec;
-
 import java.net.http.HttpRequest.Builder;
 import java.util.function.Consumer;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
+import org.apache.commons.lang3.SystemUtils;
+import org.fusesource.jansi.AnsiConsole;
 
 import com.ksm.domino.cli.command.collaborator.Collaborator;
 import com.ksm.domino.cli.command.dataset.Dataset;
@@ -21,12 +21,15 @@ import com.ksm.domino.cli.provider.EnvironmentVariableDefaultProvider;
 import com.ksm.domino.cli.provider.OutputExceptionHandler;
 import com.ksm.domino.cli.provider.OutputFormat;
 import com.ksm.domino.cli.provider.VersionProvider;
+
 import io.quarkus.picocli.runtime.annotations.TopCommand;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
-import org.apache.commons.lang3.SystemUtils;
-import org.fusesource.jansi.AnsiConsole;
 import picocli.CommandLine;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
+import picocli.CommandLine.ParameterException;
+import picocli.CommandLine.ParseResult;
+import picocli.CommandLine.ScopeType;
+import picocli.CommandLine.Spec;
 
 @TopCommand
 @Command(name = "domino",
@@ -46,7 +49,7 @@ import picocli.CommandLine;
                 Run.class,
                 Server.class
         })
-public class Domino implements Runnable {
+public class Domino {
 
     /**
      * Either the Domino Workspace built in API key or a user set key checked in order.
@@ -100,10 +103,12 @@ public class Domino implements Runnable {
             AnsiConsole.systemInstall(); // enable colors on Windows
         }
 
-        final CommandLine commandLine = new CommandLine(new Domino());
+        Domino domino = new Domino();
+        final CommandLine commandLine = new CommandLine(domino);
         commandLine.setCaseInsensitiveEnumValuesAllowed(true);
         commandLine.setSubcommandsCaseInsensitive(true);
         commandLine.setOptionsCaseInsensitive(true);
+        commandLine.setExecutionStrategy(domino::executionStrategy);
         commandLine.setExecutionExceptionHandler(new OutputExceptionHandler());
         int exitCode = commandLine.execute(args);
 
@@ -113,23 +118,21 @@ public class Domino implements Runnable {
         System.exit(exitCode);
     }
 
-    @Override
-    public void run() {
+    private int executionStrategy(ParseResult parseResult) {
         if (!isTokenConfigured() && !isKeyConfigured()) {
-            System.err.println("Domino access token must be set with -a parameter or DOMINO_API_TOKEN environment variable!");
-            return;
+            throw new ParameterException(spec.commandLine(), "Domino access token must be set with -a parameter or DOMINO_API_TOKEN environment variable!");
         }
 
-        if (!isTokenConfigured() && isKeyConfigured()) {
+        if (isKeyConfigured() && !isTokenConfigured()) {
+            
             System.err.println("Warning: Domino API Keys are being deprecated. Switch to using Domino service account tokens at your convenience.");
         }
 
         if ((StringUtils.isBlank(apiUrl) || Strings.CI.equals(ENV_API_URL, apiUrl)) && !isProxiable()) {
-            System.err.println("Domino API URL must be set with -u parameter or DOMINO_API_URL environment variable!");
-            return;
+            throw new ParameterException(spec.commandLine(), "Domino API URL must be set with -u parameter or DOMINO_API_URL environment variable!");
         }
-        // if the command was invoked without subcommand, show the usage help
-        spec.commandLine().usage(System.err);
+
+        return new CommandLine.RunLast().execute(parseResult); // default execution strategy
     }
 
     /**
