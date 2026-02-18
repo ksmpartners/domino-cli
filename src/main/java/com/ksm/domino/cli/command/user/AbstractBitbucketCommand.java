@@ -3,7 +3,7 @@ package com.ksm.domino.cli.command.user;
 import java.util.Map;
 
 import com.dominodatalab.api.invoker.ApiClient;
-import com.dominodatalab.api.model.DominoCommonUserPersonWithRoles;
+import com.dominodatalab.api.model.DominoCommonUserPersonWithAnnotations;
 import com.dominodatalab.api.model.DominoServerAccountApiGitCredentialAccessorDto;
 import com.dominodatalab.api.rest.GitCredentialsApi;
 import com.dominodatalab.api.rest.UsersApi;
@@ -43,7 +43,7 @@ abstract class AbstractBitbucketCommand extends AbstractDominoCommand {
         ApiClient apiClient = getApiClient(userCredentialAdd.user.domino);
         UsersApi api = new UsersApi(apiClient);
 
-        DominoCommonUserPersonWithRoles user = api.getCurrentUser();
+        DominoCommonUserPersonWithAnnotations user = api.getCurrentUser();
 
         GitCredentialsApi gitApi = new GitCredentialsApi(apiClient);
 

@@ -1,6 +1,6 @@
 package com.ksm.domino.cli.command.user;
 
-import com.dominodatalab.api.model.DominoCommonUserPersonWithRoles;
+import com.dominodatalab.api.model.DominoCommonUserPersonWithAnnotations;
 import com.dominodatalab.api.rest.UsersApi;
 import com.ksm.domino.cli.command.AbstractDominoCommand;
 
@@ -16,7 +16,7 @@ public class UserCurrent extends AbstractDominoCommand {
     @Override
     public void execute() throws Exception {
         UsersApi api = new UsersApi(getApiClient(parent.domino));
-        DominoCommonUserPersonWithRoles user = api.getCurrentUser();
+        DominoCommonUserPersonWithAnnotations user = api.getCurrentUser();
         output(user, parent.domino);
     }
 }

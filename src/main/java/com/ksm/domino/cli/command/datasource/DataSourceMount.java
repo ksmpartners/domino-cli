@@ -28,7 +28,7 @@ public class DataSourceMount extends AbstractDominoCommand {
                     DominoDatasetrwApiSharedDatasetRwEntryDto.JSON_PROPERTY_PROJECT_ID, NAME);
         String datasetId = getRequiredParam(parameters, "datasourceId", NAME);
         DataSourceApi api = new DataSourceApi(getApiClient(parent.domino));
-        DominoDatasourceApiDataSourceDto result = api.addProjectToDataSource(datasetId, projectId);
+        DominoDatasourceApiDataSourceDto result = api.addProject(datasetId, projectId);
         output(result, parent.domino);
     }
 }
