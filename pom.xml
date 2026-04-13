@@ -59,7 +59,7 @@
         <maven.compiler.release>17</maven.compiler.release>
         <domino.version>6.2.0.0</domino.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <quarkus.platform.version>3.34.2</quarkus.platform.version>
+        <quarkus.platform.version>3.34.3</quarkus.platform.version>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
         <exec.mainClass>com.ksm.domino.cli.provider.Launcher</exec.mainClass>
