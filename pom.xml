@@ -57,7 +57,7 @@
     </issueManagement>
     <properties>
         <maven.compiler.release>17</maven.compiler.release>
-        <domino.version>6.2.0.1</domino.version>
+        <domino.version>6.2.0.3</domino.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <quarkus.platform.version>3.35.4</quarkus.platform.version>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
